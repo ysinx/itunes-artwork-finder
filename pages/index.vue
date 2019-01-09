@@ -4,20 +4,24 @@
     <div id="home-header">
       <i class="sidebar-toggle" @click.self.stop="toggleSidebar(true)"></i>
     </div>
-    <p>Body</p>
+    <Empty v-if="itunesResult.length <= 0"/>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue'
 import SideBar from '../components/sidebar.vue'
+import Empty from '../components/empty.vue'
 
-export default {
+export default Vue.extend({
   components: {
-    SideBar
+    SideBar,
+    Empty
   },
   data() {
     return {
-      toggleStatus: false
+      toggleStatus: true,
+      itunesResult: []
     }
   },
   methods: {
@@ -25,7 +29,7 @@ export default {
       this.toggleStatus = statusCode
     }
   }
-}
+})
 </script>
 
 <style>
@@ -38,9 +42,8 @@ div#home {
 div#home-header {
   display: none;
   width: 100%;
-  padding: 15px;
+  padding: 10px 15px;
   text-align: left;
-  border-bottom: 1px solid #dbdfe1;
   overflow: hidden;
 }
 
@@ -49,7 +52,7 @@ i.sidebar-toggle {
   display: block;
   height: 40px;
   width: 40px;
-  background: url('../static/menu.svg') center no-repeat;
+  background: url('../static/search.svg') center no-repeat;
   background-size: 30px;
 }
 
@@ -57,7 +60,7 @@ i.sidebar-toggle {
   div#home {
     padding: 0;
   }
-  
+
   div#home-header {
     display: block;
   }

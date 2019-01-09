@@ -34,7 +34,7 @@ body {
   font-family: PingFangSC, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Ubuntu, Helvetica Neue, sans-serif;
   margin: auto;
-  color: #404040;
+  color: rgb(32, 82, 132);
   background: #fff;
   min-width: 320px;
   -moz-osx-font-smoothing: grayscale;

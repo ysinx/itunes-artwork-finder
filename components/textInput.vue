@@ -10,15 +10,26 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   props: ['title', 'placeholder', 'value']
-})
+}
 </script>
 
 <style scoped>
+::-webkit-input-placeholder {
+  color: #c6d0eb;
+}
+::-moz-placeholder {
+  color: #c6d0eb;
+}
+:-ms-input-placeholder {
+  color: #c6d0eb;
+}
+:-moz-placeholder {
+  color: #c6d0eb;
+}
+
 div.text-input {
   display: block;
   width: 100%;
@@ -30,7 +41,7 @@ div.text-input + div {
 
 span {
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
   line-height: 2;
   text-align: left;
@@ -38,13 +49,15 @@ span {
 
 input {
   display: block;
-  margin-top: 3px;
+  margin-top: 5px;
   width: 100%;
-  border: 1px solid #dbdfe1;
-  border-radius: 4px;
+  border: 1px solid rgb(198, 208, 235);
+  border-radius: 6px;
   padding: 5px 10px;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 2;
+  color: #205284;
   appearance: none;
   outline: 0;
   overflow: hidden;
