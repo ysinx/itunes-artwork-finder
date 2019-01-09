@@ -1,0 +1,13 @@
+[
+  {
+    "software": "Application",
+    "audiobook": "Audiobook",
+    "ebook": "Ebook",
+    "movie": "Movie",
+    "album": "Music",
+    "musicVideo": "MV",
+    "podcast": "Podcast",
+    "shortFilm": "Short Film",
+    "tvSeason": "TV Show"
+  }
+]
