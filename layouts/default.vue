@@ -33,7 +33,6 @@ a {
 body {
   font-family: PingFangSC, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Ubuntu, Helvetica Neue, sans-serif;
-  margin: auto;
   color: rgb(32, 82, 132);
   background: #fff;
   min-width: 320px;
