@@ -37,16 +37,16 @@ select {
   display: block;
   margin-top: 5px;
   width: 100%;
-  border: 1px solid rgb(198, 208, 235);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
   padding: 5px 44px 5px 10px;
   font-size: 16px;
   font-weight: 500;
   line-height: 2;
-  color: #205284;
+  color: rgb(198, 208, 235);
+  background: rgba(255, 255, 255, 0.15);
   appearance: none;
   outline: 0;
-  background: transparent;
   overflow: hidden;
 }
 i {

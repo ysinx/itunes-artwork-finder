@@ -1,10 +1,5 @@
 <template>
   <div id="home">
-    <SideBar
-      :toggleStatus="toggleStatus"
-      :itunesResult="itunesResult"
-      v-on:toggleSidebar="toggleSidebar($event)"
-    />
     <div id="home-header">
       <i class="sidebar-toggle" @click.self.stop="toggleSidebar(true)"></i>
     </div>
@@ -12,6 +7,12 @@
     <div id="home-card" :class="{ lock: toggleStatus || itunesResult.length <= 0 }">
       <Card v-for="item in itunesResult" :key="item.id" :src="item.artworkUrl600"/>
     </div>
+    <SideBar
+      :toggleStatus="toggleStatus"
+      :itunesResult="itunesResult"
+      v-on:toggleSidebar="toggleSidebar($event)"
+      v-on:itunesResultCallback="itunesResult = $event; toggleSidebar(false);"
+    />
   </div>
 </template>
 
@@ -38,6 +39,13 @@ export default Vue.extend({
     toggleSidebar(statusCode) {
       this.toggleStatus = statusCode
     }
+  },
+  created() {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        this.toggleStatus = false
+      }
+    })
   }
 })
 </script>
@@ -66,13 +74,14 @@ i.sidebar-toggle {
 
 div#home-card {
   display: block;
-  height: 100%;
   width: 100%;
-  overflow: hidden;
+  padding: 30px 15px;
+  font-size: 0;
+  text-align: center;
 }
 div#home-card.lock {
   position: fixed;
-  top: 0;
+  top: 60px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -85,6 +94,11 @@ div#home-card.lock {
 
   div#home-header {
     display: block;
+  }
+}
+@media screen and (max-width: 600px) {
+  div#home-card {
+    padding: 0 15px 15px 15px;
   }
 }
 </style>

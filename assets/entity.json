@@ -1,11 +1,12 @@
 [
   {
+    "album": "Album",
     "software": "Application",
+    "iPadSoftware": "iPad Application",
+    "macSoftware": "Mac Application",
     "audiobook": "Audiobook",
-    "ebook": "Ebook",
+    "ebook": "iBook",
     "movie": "Movie",
-    "album": "Music",
-    "musicVideo": "MV",
     "podcast": "Podcast",
     "shortFilm": "Short Film",
     "tvSeason": "TV Show"

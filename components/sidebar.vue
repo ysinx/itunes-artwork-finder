@@ -1,6 +1,10 @@
 <template>
-  <div id="side" class="flex-center" :class="{ active: toggleStatus }">
-    <i class="sidebar-toggle" @click.self.stop="$emit('toggleSidebar', false)"></i>
+  <div id="side" :class="{ active: toggleStatus }">
+    <i
+      class="sidebar-toggle"
+      v-if="itunesResult && itunesResult.length > 0"
+      @click.self.stop="$emit('toggleSidebar', false)"
+    ></i>
     <div id="side-container">
       <TextInput title="关键字" placeholder="例如：Daft Punk" v-model="project.name"/>
       <TextSelect title="类别" :data="entity" v-model="project.entity"/>
@@ -8,23 +12,29 @@
       <button class="confirm" @click.self.stop="search()">搜索</button>
     </div>
     <footer>
-      该项目由 coder-ysj 开发，TH3EE 设计
-      <br>并且已在
-      <a href="https://github.com/coder-ysj/jayyan.net-itunes" target="_blank">GitHub</a> 上开源，欢迎 Star
-      <br>也希望您能扫描文档中的二维码付费赞助
+      Dev by coder-ysj. Designed by TH3EE.
+      <br>Already open source on
+      <a
+        href="https://github.com/coder-ysj/jayyan.net-itunes"
+        target="_blank"
+      >GitHub</a>.
+      <br>Copyright © 2019 coder-ysj.
     </footer>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import axios from 'axios'
+
 import entityJson from '../assets/entity.json'
 import countryJson from '../assets/country.json'
+
 import TextInput from './textInput.vue'
 import TextSelect from './textSelect.vue'
 
 export default Vue.extend({
-  props: ['toggleStatus'],
+  props: ['toggleStatus', 'itunesResult'],
   components: {
     TextInput,
     TextSelect
@@ -42,7 +52,52 @@ export default Vue.extend({
   },
   methods: {
     search() {
-      console.warn(this.project)
+      if (!this.project.name) {
+        alert('请输入关键字')
+        return
+      } else if (this.project.entity === '- 请选择 -') {
+        alert('请选择类别')
+        return
+      } else if (this.project.country === '- 请选择 -') {
+        alert('请选择国家 / 地区')
+        return
+      }
+
+      // 刷新 UI
+      this.$emit('itunesResultCallback', [])
+
+      // 获取 iTunes 数据
+      axios
+        .get('https://api.jayyan.net/itunes/list', {
+          params: {
+            name: this.project.name,
+            country: this.project.country,
+            entity: this.project.entity,
+            limit: 50
+          }
+        })
+        .then(response => {
+          const res = response.data
+          if (!res.results || res.results.length <= 0) {
+            this.$emit('itunesResultCallback', [])
+            return
+          }
+          res.results.map(item => {
+            if (item.artworkUrl100) {
+              item.artworkUrl600 = item.artworkUrl100.replace(
+                '100x100',
+                '600x600'
+              )
+              item.artworkUrl10000 = item.artworkUrl100.replace(
+                '100x100',
+                '10000x10000'
+              )
+            }
+          })
+          console.log(res)
+          this.$emit('itunesResultCallback', res.results)
+        })
+        .catch(() => {})
     }
   }
 })
@@ -50,23 +105,28 @@ export default Vue.extend({
 
 <style scoped>
 div#side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   height: 100%;
-  min-height: 550px;
   width: 350px;
   min-width: 320px;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  padding: 30px;
-  border-right: 1px solid #dbdfe1;
-  background: #fff;
-  overflow: hidden;
-  transition: left 0.25s ease-in-out;
+  transform: translateX(0);
+  padding: 30px 35px;
+  color: rgb(198, 208, 235);
+  background-color: rgba(4, 8, 37, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transition: transform 0.3s ease-in-out;
   z-index: 9;
 }
 div#side.active {
-  left: 0;
+  transform: translateX(0);
 }
 
 i.sidebar-toggle {
@@ -77,7 +137,7 @@ i.sidebar-toggle {
   right: 10px;
   height: 40px;
   width: 40px;
-  background: url('../static/arrowleft.svg') center no-repeat;
+  background: url('../static/close.svg') center no-repeat;
   background-size: 30px;
 }
 
@@ -106,39 +166,55 @@ button.confirm {
     rgb(176, 30, 255) 0%,
     rgb(225, 70, 124) 100%
   );
+  box-shadow: rgba(101, 41, 255, 0.15) 0px 5px 15px;
   overflow: hidden;
 }
 
 footer {
   display: block;
   width: 100%;
-  padding: 30px;
+  padding: 30px 35px;
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
   font-size: 12px;
   line-height: 1.6;
-  color: #94a4ba;
+  color: rgb(198, 208, 235);
   text-align: left;
 }
 
 a {
   font-weight: 500;
-  color: #b01eff;
+  color: rgb(156, 114, 248);
 }
 
+@media screen and (max-height: 550px) {
+  div#side {
+    display: block;
+    min-height: auto;
+  }
+
+  div#side-container {
+    margin-top: 0;
+  }
+
+  footer {
+    position: relative;
+    margin-top: 30px;
+    padding: 0;
+  }
+}
 @media screen and (max-width: 768px) {
   div#side {
-    left: -100%;
+    transform: translateX(-100%);
   }
 
   i.sidebar-toggle {
     display: block;
   }
 }
-
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 600px) {
   div#side {
     width: 100%;
   }
