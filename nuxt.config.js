@@ -4,18 +4,32 @@ module.exports = {
   mode: 'spa',
 
   /*
+  ** Subfolder configuration
+  */
+
+  router: {
+    base: process.env.NODE_ENV === 'dev' ? '/' : '/itunes/'
+  },
+
+  /*
   ** Headers of the page
   */
   head: {
     title: 'iTunes Artwork Finder by coder-ysj',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
-      { hid: 'description', name: 'description', content: '提取高清 iTunes 音乐专辑封面、电影海报、App Store 应用图标及截图' }
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, user-scalable=no'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          '提取高清 iTunes 音乐专辑封面、电影海报、App Store 应用图标及截图'
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
   /*
@@ -26,14 +40,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: [],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [],
 
   /*
   ** Nuxt.js modules
@@ -56,8 +68,6 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {
-      
-    }
+    extend(config, ctx) {}
   }
 }
