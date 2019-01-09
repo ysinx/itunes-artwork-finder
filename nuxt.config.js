@@ -7,11 +7,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'iTunes Artwork Finder by coder-ysj',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
+      { hid: 'description', name: 'description', content: '提取高清 iTunes 音乐专辑封面、电影海报、App Store 应用图标及截图' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
