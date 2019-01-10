@@ -78,10 +78,10 @@ export default Vue.extend({
           }
         })
         .then(response => {
-          this.isGettingData = false
           const res = response.data
           if (!res.results || res.results.length <= 0) {
             this.$emit('itunesResultCallback', [])
+            this.isGettingData = false
             return
           }
           res.results.map(item => {
@@ -96,6 +96,7 @@ export default Vue.extend({
               )
             }
           })
+          this.isGettingData = false
           this.$emit('itunesResultCallback', res.results)
         })
         .catch(() => {
@@ -177,7 +178,6 @@ button.confirm {
     rgb(176, 30, 255) 0%,
     rgb(225, 70, 124) 100%
   );
-  box-shadow: rgba(101, 41, 255, 0.15) 0px 5px 15px;
   overflow: hidden;
 }
 button.confirm > i {

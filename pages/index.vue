@@ -3,10 +3,11 @@
     <div id="home-header">
       <i class="sidebar-toggle" @click.self.stop="toggleSidebar(true)"></i>
     </div>
-    <Empty v-if="!itunesResult || itunesResult.length <= 0"/>
-    <div id="home-card" :class="{ lock: toggleStatus || itunesResult.length <= 0 }">
-      <Card v-for="item in itunesResult" :key="item.id" :src="item.artworkUrl600"/>
+    <Empty v-if="!itunesResult || itunesResult.length <= 0" :itunesResult="itunesResult"/>
+    <div id="home-card" :class="{ lock: toggleStatus || !itunesResult || itunesResult.length <= 0 }">
+      <Card v-for="item in itunesResult" :key="item.id" :src="item"/>
     </div>
+    <ScrollTop/>
     <SideBar
       :toggleStatus="toggleStatus"
       :itunesResult="itunesResult"
@@ -22,22 +23,19 @@ import Vue from 'vue'
 import SideBar from '../components/sidebar.vue'
 import Empty from '../components/empty.vue'
 import Card from '../components/card.vue'
+import ScrollTop from '../components/scrollTop.vue'
 
 export default Vue.extend({
   components: {
     SideBar,
     Empty,
-    Card
+    Card,
+    ScrollTop
   },
   data() {
     return {
       toggleStatus: true,
-      itunesResult: []
-    }
-  },
-  methods: {
-    toggleSidebar(statusCode) {
-      this.toggleStatus = statusCode
+      itunesResult: null
     }
   },
   created() {
@@ -46,6 +44,11 @@ export default Vue.extend({
         this.toggleStatus = false
       }
     })
+  },
+  methods: {
+    toggleSidebar(statusCode) {
+      this.toggleStatus = statusCode
+    }
   }
 })
 </script>

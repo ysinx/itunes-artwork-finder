@@ -1,8 +1,17 @@
 <template>
   <div class="card">
-    <div class="card-img-container">
-      <img :src="src" class="card-img" @load="loaded = true" :class="{ loaded: loaded }">
+    <div
+      class="card-img-container"
+      :class="{ movie: src.kind === 'feature-movie', loaded: loaded }"
+    >
+      <img
+        :src="src.artworkUrl600"
+        class="card-img"
+        @load="loaded = true"
+        :class="{ loaded: loaded }"
+      >
     </div>
+    <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
   </div>
 </template>
 
@@ -22,8 +31,8 @@ export default Vue.extend({
 div.card {
   cursor: pointer;
   display: inline-block;
-  vertical-align: middle;
-  margin: 15px;
+  vertical-align: top;
+  margin: 15px 15px 30px 15px;
 }
 
 div.card-img-container {
@@ -31,6 +40,14 @@ div.card-img-container {
   height: 200px;
   width: 200px;
   background: #fff;
+  transition: box-shadow 0.25s ease-in-out;
+  box-shadow: rgba(198, 208, 235, 0.75) 15px 15px 10px;
+}
+div.card-img-container.movie {
+  height: 300px;
+}
+div.card-img-container.loaded {
+  box-shadow: none;
 }
 
 img.card-img {
@@ -41,13 +58,21 @@ img.card-img {
   left: 0;
   height: 100%;
   width: 100%;
-  object-fit: contain;
   opacity: 0;
   transition: opacity 0.25s ease-in-out;
-  filter: drop-shadow(15px 15px 10px rgba(198, 208, 235, 0.75));
 }
 img.card-img.loaded {
   opacity: 1;
+}
+
+p.card-img-title {
+  display: block;
+  width: 200px;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #404040;
 }
 
 @media screen and (max-width: 600px) {
@@ -59,8 +84,16 @@ img.card-img.loaded {
   div.card-img-container {
     display: block;
     margin: auto;
-    width: 100%;
-    padding-top: 100%;
+    width: 95%;
+    padding-top: 95%;
+  }
+  div.card-img-container.movie {
+    padding-top: 142.5%;
+  }
+
+  p.card-img-title {
+    width: 95%;
+    margin: 15px auto 0 auto;
   }
 }
 </style>
