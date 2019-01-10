@@ -9,13 +9,11 @@
     >
   </div>
 </template>
-
 <script>
 export default {
   props: ['title', 'placeholder', 'value']
 }
 </script>
-
 <style scoped>
 ::-webkit-input-placeholder {
   color: rgb(198, 208, 235);

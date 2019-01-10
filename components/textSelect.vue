@@ -8,13 +8,11 @@
     <i></i>
   </div>
 </template>
-
 <script>
 export default {
   props: ['title', 'data', 'value']
 }
 </script>
-
 <style scoped>
 div.text-input {
   display: block;
@@ -43,7 +41,7 @@ select {
   font-size: 16px;
   font-weight: 500;
   line-height: 2;
-  color: rgb(198, 208, 235);
+  color: #fff;
   background: rgba(255, 255, 255, 0.15);
   appearance: none;
   outline: 0;
