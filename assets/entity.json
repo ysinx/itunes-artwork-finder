@@ -1,14 +1,14 @@
 [
   {
-    "album": "Album",
-    "software": "Application",
-    "iPadSoftware": "iPad Application",
-    "macSoftware": "Mac Application",
-    "audiobook": "Audiobook",
-    "ebook": "iBook",
-    "movie": "Movie",
-    "podcast": "Podcast",
-    "shortFilm": "Short Film",
-    "tvSeason": "TV Show"
+    "software": "iPhone 应用",
+    "iPadSoftware": "iPad 应用",
+    "macSoftware": "Mac 应用",
+    "podcast": "播客",
+    "tvSeason": "电视剧",
+    "movie": "电影",
+    "ebook": "电子书",
+    "shortFilm": "短片",
+    "album": "音乐专辑",
+    "audiobook": "有声读物"
   }
 ]
