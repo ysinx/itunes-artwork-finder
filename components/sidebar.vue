@@ -1,15 +1,14 @@
 <template>
   <div id="side" :class="{ active: toggleStatus }">
-    <i
-      class="sidebar-toggle"
-      v-if="itunesResult && itunesResult.length > 0"
-      @click.self.stop="$emit('toggleSidebar', false)"
-    ></i>
+    <i class="sidebar-toggle" @click.self.stop="$emit('toggleSidebar', false)"></i>
     <div id="side-container">
       <TextInput title="关键字" placeholder="例如：Daft Punk" v-model="project.name"/>
       <TextSelect title="类别" :data="entity" v-model="project.entity"/>
       <TextSelect title="国家 / 地区" :data="country" v-model="project.country"/>
-      <button class="confirm" @click.self.stop="search()">搜索</button>
+      <button class="confirm" v-if="!isGettingData" @click.self.stop="search()">搜索</button>
+      <button class="confirm" v-else disabled>
+        <i></i>
+      </button>
     </div>
     <footer>
       Dev by coder-ysj. Designed by TH3EE.
@@ -47,7 +46,8 @@ export default Vue.extend({
         country: '- 请选择 -'
       },
       entity: entityJson,
-      country: countryJson
+      country: countryJson,
+      isGettingData: false
     }
   },
   methods: {
@@ -64,7 +64,8 @@ export default Vue.extend({
       }
 
       // 刷新 UI
-      this.$emit('itunesResultCallback', [])
+      this.isGettingData = true
+      this.$emit('itunesResultCallback', null)
 
       // 获取 iTunes 数据
       axios
@@ -77,6 +78,7 @@ export default Vue.extend({
           }
         })
         .then(response => {
+          this.isGettingData = false
           const res = response.data
           if (!res.results || res.results.length <= 0) {
             this.$emit('itunesResultCallback', [])
@@ -94,10 +96,11 @@ export default Vue.extend({
               )
             }
           })
-          console.log(res)
           this.$emit('itunesResultCallback', res.results)
         })
-        .catch(() => {})
+        .catch(() => {
+          this.isGettingData = false
+        })
     }
   }
 })
@@ -147,6 +150,14 @@ div#side-container {
   margin-top: -75px;
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 button.confirm {
   cursor: pointer;
   display: block;
@@ -168,6 +179,15 @@ button.confirm {
   );
   box-shadow: rgba(101, 41, 255, 0.15) 0px 5px 15px;
   overflow: hidden;
+}
+button.confirm > i {
+  display: block;
+  height: 32px;
+  width: 32px;
+  margin: auto;
+  background: url('../static/loading.svg') center no-repeat;
+  background-size: 22px;
+  animation: spin 1s infinite linear;
 }
 
 footer {
