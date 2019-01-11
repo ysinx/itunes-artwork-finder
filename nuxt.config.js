@@ -8,7 +8,7 @@ module.exports = {
   */
 
   router: {
-    base: process.env.NODE_ENV === 'dev' ? '/' : '/itunes/'
+    base: '/itunes/'
   },
 
   /*

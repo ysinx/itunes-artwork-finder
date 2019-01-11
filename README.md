@@ -30,4 +30,6 @@ $ yarn start
 
 # generate static project
 $ yarn run generate
+
+# listening on: http://localhost:3000/itunes/
 ```
