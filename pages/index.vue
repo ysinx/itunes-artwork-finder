@@ -22,6 +22,7 @@
       :toggleStatus="toggleStatus"
       :itunesResult="itunesResult"
       v-on:toggleSidebar="toggleSidebar($event)"
+      v-on:clearSelectedCard="selectedCard = []"
       v-on:itunesResultCallback="itunesResult = $event; toggleSidebar(false);"
     />
   </div>

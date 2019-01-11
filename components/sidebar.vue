@@ -2,9 +2,14 @@
   <div id="side" :class="{ active: toggleStatus }">
     <i class="sidebar-toggle" @click.self.stop="$emit('toggleSidebar', false)"></i>
     <div id="side-container">
-      <TextInput title="关键字" placeholder="例如：Daft Punk" v-model="project.name"/>
       <TextSelect title="类别" :data="entity" v-model="project.entity"/>
       <TextSelect title="国家 / 地区" :data="country" v-model="project.country"/>
+      <TextInput
+        title="关键字"
+        placeholder="例如：Daft Punk"
+        v-model="project.name"
+        @keyup.enter.native="search()"
+      />
       <button class="confirm" v-if="!isGettingData" @click.self.stop="search()">搜索</button>
       <button class="confirm" v-else disabled>
         <i></i>
@@ -16,6 +21,7 @@
       <a
         href="https://github.com/coder-ysj/jayyan.net-itunes"
         target="_blank"
+        rel="noopener"
       >GitHub</a>.
       <br>Copyright © 2019 coder-ysj.
     </footer>
@@ -63,6 +69,7 @@ export default {
       }
 
       // 刷新 UI
+      this.$emit('clearSelectedCard')
       this.isGettingData = true
       this.$emit('itunesResultCallback', null)
 
