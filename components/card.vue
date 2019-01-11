@@ -1,5 +1,9 @@
 <template>
-  <div class="card">
+  <div
+    class="card"
+    :class="{ clicked: clicked, notSelected: selectedCard.length > 0 && !clicked }"
+    @click.stop="select()"
+  >
     <div
       class="card-img-container"
       :class="{ movie: src.kind === 'feature-movie', loaded: loaded }"
@@ -18,10 +22,17 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  props: ['src'],
+  props: ['src', 'selectedCard'],
   data() {
     return {
-      loaded: false
+      loaded: false,
+      clicked: false
+    }
+  },
+  methods: {
+    select() {
+      this.clicked = !this.clicked
+      this.$emit('selectCard', this.$props.src)
     }
   }
 })
@@ -33,6 +44,13 @@ div.card {
   display: inline-block;
   vertical-align: top;
   margin: 15px 15px 30px 15px;
+  transition: opacity 0.25s ease-in-out;
+}
+div.card.clicked {
+  z-index: 8;
+}
+div.card.notSelected {
+  opacity: 0.25;
 }
 
 div.card-img-container {
@@ -41,7 +59,7 @@ div.card-img-container {
   width: 200px;
   background: #fff;
   transition: box-shadow 0.25s ease-in-out;
-  box-shadow: rgba(198, 208, 235, 0.75) 15px 15px 10px;
+  box-shadow: rgba(198, 208, 235, 0.75) 5px 15px 10px;
 }
 div.card-img-container.movie {
   height: 300px;

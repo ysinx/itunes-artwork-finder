@@ -4,10 +4,20 @@
       <i class="sidebar-toggle" @click.self.stop="toggleSidebar(true)"></i>
     </div>
     <Empty v-if="!itunesResult || itunesResult.length <= 0" :itunesResult="itunesResult"/>
-    <div id="home-card" :class="{ lock: toggleStatus || !itunesResult || itunesResult.length <= 0 }">
-      <Card v-for="item in itunesResult" :key="item.id" :src="item"/>
+    <div
+      id="home-card"
+      :class="{ lock: toggleStatus || !itunesResult || itunesResult.length <= 0 }"
+    >
+      <Card
+        v-for="item in itunesResult"
+        :key="item.id"
+        :src="item"
+        :selectedCard="selectedCard"
+        v-on:selectCard="selectCard($event)"
+      />
     </div>
     <ScrollTop/>
+    <Download :selectedCard="selectedCard"/>
     <SideBar
       :toggleStatus="toggleStatus"
       :itunesResult="itunesResult"
@@ -17,25 +27,28 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 import SideBar from '../components/sidebar.vue'
 import Empty from '../components/empty.vue'
 import Card from '../components/card.vue'
 import ScrollTop from '../components/scrollTop.vue'
+import Download from '../components/download.vue'
 
-export default Vue.extend({
+export default {
   components: {
     SideBar,
     Empty,
     Card,
-    ScrollTop
+    ScrollTop,
+    Download
   },
   data() {
     return {
       toggleStatus: true,
-      itunesResult: null
+      itunesResult: null,
+      selectedCard: []
     }
   },
   created() {
@@ -48,9 +61,22 @@ export default Vue.extend({
   methods: {
     toggleSidebar(statusCode) {
       this.toggleStatus = statusCode
+    },
+    selectCard(data) {
+      if (this.selectedCard.length <= 0) {
+        this.selectedCard.push(data)
+      } else {
+        for (let index = 0; index < this.selectedCard.length; index++) {
+          if (Object.is(this.selectedCard[index], data)) {
+            this.selectedCard.splice(index, 1)
+            return
+          }
+        }
+        this.selectedCard.push(data)
+      }
     }
   }
-})
+}
 </script>
 
 <style>
