@@ -21,7 +21,7 @@
 # install dependencies
 $ yarn install
 
-# serve with hot reload at localhost:3000
+# serve with hot reload at localhost:3000/itunes/
 $ yarn run dev
 
 # build for production and launch server
@@ -30,6 +30,4 @@ $ yarn start
 
 # generate static project
 $ yarn run generate
-
-# listening on: http://localhost:3000/itunes/
 ```
