@@ -15,6 +15,9 @@ module.exports = {
   ** Headers of the page
   */
   head: {
+    htmlAttrs: {
+      lang: 'zh-Hant'
+    },
     title: 'iTunes Artwork Finder by coder-ysj',
     meta: [
       { charset: 'utf-8' },
