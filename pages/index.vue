@@ -17,7 +17,7 @@
       />
     </div>
     <ScrollTop/>
-    <Download :selectedCard="selectedCard"/>
+    <Download :selectedCard="selectedCard" v-on:clearSelectedCard="selectedCard = []"/>
     <SideBar
       :toggleStatus="toggleStatus"
       :itunesResult="itunesResult"

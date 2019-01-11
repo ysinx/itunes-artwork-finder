@@ -1,7 +1,7 @@
 <template>
   <div
     class="card"
-    :class="{ clicked: clicked, notSelected: selectedCard.length > 0 && !clicked }"
+    :class="{ clicked: clickedStatus(), notSelected: selectedCard.length > 0 && !clicked }"
     @click.stop="select()"
   >
     <div
@@ -30,6 +30,13 @@ export default Vue.extend({
     }
   },
   methods: {
+    clickedStatus() {
+      if (this.$props.selectedCard.length <= 0) {
+        this.clicked = false
+        return
+      }
+      return this.clicked
+    },
     select() {
       this.clicked = !this.clicked
       this.$emit('selectCard', this.$props.src)
