@@ -51,14 +51,11 @@ div.scroll-top {
   height: 50px;
   width: 50px;
   right: 30px;
-  bottom: 50px;
+  bottom: 100px;
   border-radius: 50%;
-  background: linear-gradient(
-    104.74deg,
-    rgb(176, 30, 255) 0%,
-    rgb(225, 70, 124) 100%
-  );
-  box-shadow: rgba(101, 41, 255, 0.15) 0px 5px 15px;
+  border: 1px solid rgb(198, 208, 235);
+  background: #fff;
+  box-shadow: rgba(198, 208, 235, 0.5) 0px 5px 15px;
 }
 div.scroll-top > i {
   display: block;
