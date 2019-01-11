@@ -6,13 +6,15 @@
   >
     <div
       class="card-img-container"
-      :class="{ movie: src.kind === 'feature-movie', loaded: loaded }"
+      :class="{ movie: src.kind === 'feature-movie', loaded: loaded, failed: failed }"
     >
+      <p class="card-img-failed" v-if="failed">加载失败</p>
       <img
         :src="src.artworkUrl600"
         class="card-img"
         @load="loaded = true"
-        :class="{ loaded: loaded }"
+        @error="failed = true"
+        :class="{ loaded: loaded, failed: failed }"
       >
     </div>
     <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
@@ -26,6 +28,7 @@ export default Vue.extend({
   data() {
     return {
       loaded: false,
+      failed: false,
       clicked: false
     }
   },
@@ -74,20 +77,45 @@ div.card-img-container.movie {
 div.card-img-container.loaded {
   box-shadow: none;
 }
+div.card-img-container.failed {
+  box-shadow: none;
+  background: linear-gradient(
+    104.74deg,
+    rgb(30, 22, 163) 0%,
+    rgb(126, 66, 112) 100%
+  );
+  border-radius: 12px;
+}
+
+p.card-img-failed {
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: calc(50% - 15px);
+  right: 0;
+  left: 0;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 30px;
+  color: #fff;
+  text-align: center;
+}
 
 img.card-img {
   display: block;
+  width: 100%;
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
   opacity: 0;
   transition: opacity 0.25s ease-in-out;
 }
 img.card-img.loaded {
   opacity: 1;
+}
+img.card-img.failed {
+  display: none;
 }
 
 p.card-img-title {

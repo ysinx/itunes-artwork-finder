@@ -56,6 +56,7 @@ div.scroll-top {
   border: 1px solid rgb(198, 208, 235);
   background: #fff;
   box-shadow: rgba(198, 208, 235, 0.5) 0px 5px 15px;
+  z-index: 8;
 }
 div.scroll-top > i {
   display: block;
