@@ -21,8 +21,7 @@
     </footer>
   </div>
 </template>
-
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import axios from 'axios'
 
@@ -32,7 +31,7 @@ import countryJson from '../assets/country.json'
 import TextInput from './textInput.vue'
 import TextSelect from './textSelect.vue'
 
-export default Vue.extend({
+export default {
   props: ['toggleStatus', 'itunesResult'],
   components: {
     TextInput,
@@ -104,9 +103,8 @@ export default Vue.extend({
         })
     }
   }
-})
+}
 </script>
-
 <style scoped>
 div#side {
   display: flex;
