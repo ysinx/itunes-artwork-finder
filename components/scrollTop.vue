@@ -46,7 +46,7 @@ export default {
 
 div.scroll-top {
   cursor: pointer;
-  display: block;
+  display: none;
   position: fixed;
   height: 50px;
   width: 50px;
@@ -64,5 +64,11 @@ div.scroll-top > i {
   width: 100%;
   background: url('../static/arrow-up.svg') center no-repeat;
   background-size: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  div.scroll-top {
+    display: block;
+  }
 }
 </style>
