@@ -17,7 +17,7 @@
         :class="{ loaded: loaded, failed: failed }"
       >
     </div>
-    <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
+    <p class="card-img-title">{{ src.name }}</p>
   </div>
 </template>
 
@@ -103,10 +103,12 @@ p.card-img-failed {
 
 img.card-img {
   display: block;
+  height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
   right: 0;
+  bottom: 0;
   left: 0;
   opacity: 0;
   transition: opacity 0.25s ease-in-out;

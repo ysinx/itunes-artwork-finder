@@ -85,25 +85,13 @@ export default {
         })
         .then(response => {
           const res = response.data
-          if (!res.results || res.results.length <= 0) {
+          if (!res || res.length <= 0) {
             this.$emit('itunesResultCallback', [])
             this.isGettingData = false
             return
           }
-          res.results.map(item => {
-            if (item.artworkUrl100) {
-              item.artworkUrl600 = item.artworkUrl100.replace(
-                '100x100',
-                '600x600'
-              )
-              item.artworkUrl10000 = item.artworkUrl100.replace(
-                '100x100',
-                '10000x10000'
-              )
-            }
-          })
           this.isGettingData = false
-          this.$emit('itunesResultCallback', res.results)
+          this.$emit('itunesResultCallback', res)
         })
         .catch(() => {
           this.isGettingData = false
