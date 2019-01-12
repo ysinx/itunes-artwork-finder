@@ -3,6 +3,7 @@
     <div id="download" v-if="selectedCard.length > 0" @click.stop="chooseMenu()">
       <p>您已选择 {{ selectedCard.length > 9 ? '9+' : selectedCard.length }} 个项目</p>
       <i @click.self.stop="$emit('clearSelectedCard')"></i>
+      <!-- <div id="download-list"></div> -->
     </div>
   </transition>
 </template>
@@ -68,6 +69,17 @@ i {
   border: 0;
   background: url('../static/close-fill.svg') center no-repeat;
   background-size: 100%;
+}
+
+div#download-list {
+  display: block;
+  height: 100px;
+  width: calc(100% - 50px);
+  position: absolute;
+  right: 25px;
+  bottom: 50px;
+  background: red;
+  z-index: 7;
 }
 
 @media screen and (max-width: 768px) {
