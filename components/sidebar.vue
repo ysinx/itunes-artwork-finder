@@ -1,5 +1,6 @@
 <template>
   <div id="side" :class="{ active: toggleStatus }">
+    <i class="sidebar-ico"></i>
     <i class="sidebar-toggle" @click.self.stop="$emit('toggleSidebar', false)"></i>
     <div id="side-container">
       <TextSelect title="类别" :data="entity" v-model="project.entity"/>
@@ -124,6 +125,18 @@ div#side {
 }
 div#side.active {
   transform: translateX(0);
+}
+
+i.sidebar-ico {
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: url('../static/icon.png') center no-repeat;
+  background-size: 100%;
 }
 
 i.sidebar-toggle {
