@@ -17,7 +17,7 @@
       </button>
     </div>
     <footer>
-      Dev by coder-ysj. Designed by TH3EE.
+      Dev by coder-ysj.
       <br>Already open source on
       <a
         href="https://github.com/coder-ysj/jayyan.net-itunes"
