@@ -3,11 +3,10 @@
     <div id="download" v-if="selectedCard.length > 0" @click.stop="chooseMenu()">
       <p>您已选择 {{ selectedCard.length > 9 ? '9+' : selectedCard.length }} 个项目</p>
       <i @click.self.stop="$emit('clearSelectedCard')"></i>
-      <div id="download-list" v-if="drawer">
-        <button>原图下载（9600 x 9600）</button>
-        <button>超清下载（2400 x 2400）</button>
-        <button>高清下载（1200 x 1200）</button>
-        <button>标清下载（600 x 600）</button>
+      <div id="download-list">
+        <button @click.self.stop="download(9600)">原图下载（9600 x 9600）</button>
+        <button @click.self.stop="download(1200)">高清下载（1200 x 1200）</button>
+        <button @click.self.stop="download(600)">标清下载（600 x 600）</button>
       </div>
     </div>
   </transition>
@@ -15,14 +14,21 @@
 <script>
 export default {
   props: ['selectedCard'],
-  data() {
-    return {
-      drawer: false
-    }
-  },
   methods: {
-    chooseMenu() {
-      this.drawer = !this.drawer
+    download(ratio) {
+      if (this.$props.selectedCard.length <= 0) return
+      if (this.$props.selectedCard.length > 1) {
+        alert('暂未开放多选下载功能')
+        return
+      }
+      switch (ratio) {
+        case 600:
+          window.open(this.$props.selectedCard[0].artworkUrl600)
+        case 1200:
+          window.open(this.$props.selectedCard[0].artworkUrl1200)
+        case 9600:
+          window.open(this.$props.selectedCard[0].artworkUrl9600)
+      }
     }
   }
 }
