@@ -10,7 +10,7 @@
     >
       <p class="card-img-failed" v-if="failed">加载失败</p>
       <img
-        :src="src.artworkUrl600"
+        :src="reloadSrc"
         class="card-img"
         @load="loaded = true"
         @error="failed = true"
@@ -27,10 +27,15 @@ export default Vue.extend({
   props: ['src', 'selectedCard'],
   data() {
     return {
+      rawSrc: this.$props.src.artworkUrl600,
+      reloadSrc: '',
       loaded: false,
       failed: false,
       clicked: false
     }
+  },
+  created() {
+    this.reloadSrc = this.rawSrc
   },
   methods: {
     clickedStatus() {
@@ -41,6 +46,11 @@ export default Vue.extend({
       return this.clicked
     },
     select() {
+      if (this.failed === true) {
+        this.failed = false
+        this.reloadSrc = this.rawSrc + '?h=' + new Date().getTime()
+        return
+      }
       this.clicked = !this.clicked
       this.$emit('selectCard', this.$props.src)
     }
