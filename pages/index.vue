@@ -16,7 +16,6 @@
         v-on:selectCard="selectCard($event)"
       />
     </div>
-    <ScrollTop/>
     <Download :selectedCard="selectedCard" v-on:clearSelectedCard="selectedCard = []"/>
     <SideBar
       :toggleStatus="toggleStatus"
@@ -27,14 +26,12 @@
     />
   </div>
 </template>
-
 <script>
 import Vue from 'vue'
 
 import SideBar from '../components/sidebar.vue'
 import Empty from '../components/empty.vue'
 import Card from '../components/card.vue'
-import ScrollTop from '../components/scrollTop.vue'
 import Download from '../components/download.vue'
 
 export default {
@@ -42,7 +39,6 @@ export default {
     SideBar,
     Empty,
     Card,
-    ScrollTop,
     Download
   },
   data() {
@@ -79,7 +75,6 @@ export default {
   }
 }
 </script>
-
 <style>
 div#home {
   padding-left: 350px;

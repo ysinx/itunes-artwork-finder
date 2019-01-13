@@ -3,16 +3,26 @@
     <div id="download" v-if="selectedCard.length > 0" @click.stop="chooseMenu()">
       <p>您已选择 {{ selectedCard.length > 9 ? '9+' : selectedCard.length }} 个项目</p>
       <i @click.self.stop="$emit('clearSelectedCard')"></i>
-      <!-- <div id="download-list"></div> -->
+      <div id="download-list" v-if="drawer">
+        <button>原图下载（9600 x 9600）</button>
+        <button>超清下载（2400 x 2400）</button>
+        <button>高清下载（1200 x 1200）</button>
+        <button>标清下载（600 x 600）</button>
+      </div>
     </div>
   </transition>
 </template>
 <script>
 export default {
   props: ['selectedCard'],
+  data() {
+    return {
+      drawer: false
+    }
+  },
   methods: {
     chooseMenu() {
-      console.log('Choose Menu.')
+      this.drawer = !this.drawer
     }
   }
 }
@@ -73,13 +83,29 @@ i {
 
 div#download-list {
   display: block;
-  height: 100px;
   width: calc(100% - 50px);
   position: absolute;
   right: 25px;
   bottom: 50px;
-  background: red;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  background-color: rgba(4, 8, 37, 1);
   z-index: 7;
+}
+
+div#download-list > button {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 3;
+  outline: 0;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+div#download-list > button + button {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 @media screen and (max-width: 768px) {
