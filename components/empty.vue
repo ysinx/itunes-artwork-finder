@@ -4,11 +4,11 @@
     <i class="empty zero" v-else-if="itunesResult && itunesResult.length <= 0"></i>
   </div>
 </template>
-<script lang="ts">
+<script>
 import Vue from 'vue'
-export default Vue.extend({
+export default {
   props: ['itunesResult']
-})
+}
 </script>
 <style scoped>
 div.empty {
@@ -25,7 +25,7 @@ i.empty {
   background-size: 100px;
 }
 i.empty.zero {
-  background-image: url("../static/frown.svg")
+  background-image: url('../static/frown.svg');
 }
 
 @media screen and (max-width: 768px) {

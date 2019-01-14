@@ -17,7 +17,7 @@
         :class="{ loaded: loaded, failed: failed }"
       >
     </div>
-    <p class="card-img-title">{{ src.name }}</p>
+    <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
   </div>
 </template>
 <script>
@@ -26,7 +26,7 @@ export default {
   props: ['src', 'selectedCard'],
   data() {
     return {
-      rawSrc: this.$props.src.artworkUrl600,
+      rawSrc: this.$props.src.artworkUrl512,
       reloadSrc: '',
       loaded: false,
       failed: false,

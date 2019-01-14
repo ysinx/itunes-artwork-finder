@@ -86,15 +86,16 @@ export default {
         })
         .then(response => {
           const res = response.data
-          if (!res || res.length <= 0) {
+          if (!res.results || res.results.length <= 0) {
             this.$emit('itunesResultCallback', [])
             this.isGettingData = false
             return
           }
           this.isGettingData = false
-          this.$emit('itunesResultCallback', res)
+          this.$emit('itunesResultCallback', res.results)
         })
         .catch(() => {
+          this.$emit('itunesResultCallback', [])
           this.isGettingData = false
         })
     }
