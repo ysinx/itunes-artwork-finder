@@ -24,10 +24,16 @@ export default {
       switch (ratio) {
         case 600:
           window.open(this.$props.selectedCard[0].artworkUrl600)
+          break
         case 1200:
           window.open(this.$props.selectedCard[0].artworkUrl1200)
+          break
         case 9600:
           window.open(this.$props.selectedCard[0].artworkUrl9600)
+          break
+        default:
+          window.open(this.$props.selectedCard[0].artworkUrl9600)
+          break
       }
     }
   }
