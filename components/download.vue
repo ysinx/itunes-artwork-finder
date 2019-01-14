@@ -5,8 +5,8 @@
       <i @click.self.stop="$emit('clearSelectedCard')"></i>
       <div id="download-list">
         <button @click.self.stop="download(9600)">原图下载（9600 x 9600）</button>
-        <button @click.self.stop="download(1200)">高清下载（1200 x 1200）</button>
-        <button @click.self.stop="download(600)">标清下载（600 x 600）</button>
+        <button @click.self.stop="download(512)">高清下载（512 x 512）</button>
+        <button @click.self.stop="download(100)">标清下载（100 x 100）</button>
       </div>
     </div>
   </transition>
@@ -22,17 +22,17 @@ export default {
         return
       }
       switch (ratio) {
-        case 600:
-          window.open(this.$props.selectedCard[0].artworkUrl600)
+        case 100:
+          window.open(this.$props.selectedCard[0].artworkUrl100)
           break
-        case 1200:
-          window.open(this.$props.selectedCard[0].artworkUrl1200)
+        case 512:
+          window.open(this.$props.selectedCard[0].artworkUrl512)
           break
         case 9600:
           window.open(this.$props.selectedCard[0].artworkUrl9600)
           break
         default:
-          window.open(this.$props.selectedCard[0].artworkUrl9600)
+          window.open(this.$props.selectedCard[0].artworkUrl100)
           break
       }
     }
