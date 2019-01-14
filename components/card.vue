@@ -20,10 +20,9 @@
     <p class="card-img-title">{{ src.name }}</p>
   </div>
 </template>
-
-<script lang="ts">
+<script>
 import Vue from 'vue'
-export default Vue.extend({
+export default {
   props: ['src', 'selectedCard'],
   data() {
     return {
@@ -55,9 +54,8 @@ export default Vue.extend({
       this.$emit('selectCard', this.$props.src)
     }
   }
-})
+}
 </script>
-
 <style scoped>
 div.card {
   cursor: pointer;
