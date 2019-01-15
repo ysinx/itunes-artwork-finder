@@ -56,6 +56,18 @@ export default {
       isGettingData: false
     }
   },
+  mounted() {
+    let project
+    try {
+      project = JSON.parse(localStorage['history'])
+    } catch {
+      return
+    }
+
+    if (!this.verifyKey(entityJson, project.entity)) return
+    if (!this.verifyKey(countryJson, project.country)) return
+    this.project = project
+  },
   methods: {
     search() {
       if (!this.project.name) {
@@ -73,6 +85,9 @@ export default {
       this.$emit('clearSelectedCard')
       this.isGettingData = true
       this.$emit('itunesResultCallback', null)
+
+      // 存储搜索对象
+      localStorage.setItem('history', JSON.stringify(this.project))
 
       // 获取 iTunes 数据
       axios
@@ -98,6 +113,11 @@ export default {
           this.$emit('itunesResultCallback', [])
           this.isGettingData = false
         })
+    },
+    verifyKey(arr, key) {
+      const json = arr[0]
+      if (json[key] !== undefined) return true
+      return false
     }
   }
 }
