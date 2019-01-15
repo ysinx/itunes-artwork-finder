@@ -1,6 +1,5 @@
 <template>
   <div id="side" :class="{ active: toggleStatus }">
-    <i class="sidebar-ico"></i>
     <i class="sidebar-toggle" @click.self.stop="$emit('toggleSidebar', false)"></i>
     <div id="side-container">
       <TextSelect title="类别" :data="entity" v-model="project.entity"/>
