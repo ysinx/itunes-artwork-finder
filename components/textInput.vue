@@ -39,7 +39,7 @@ div.text-input + div {
 
 span {
   display: block;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 2;
   text-align: left;
@@ -51,8 +51,8 @@ input {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 16px;
+  padding: 10px 15px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 2;
   color: #fff;

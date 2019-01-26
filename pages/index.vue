@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <div id="side">
+    <div id="home-flex">
       <TextSelect title="类别" :data="entity" v-model="project.entity"/>
       <TextSelect title="国家 / 地区" :data="country" v-model="project.country"/>
       <TextInput
@@ -29,11 +29,13 @@
 <script>
 import axios from 'axios'
 
-import entityJson from '../assets/entity.json'
-import countryJson from '../assets/country.json'
+// 表单
+import entityJson from '~/assets/entity.json'
+import countryJson from '~/assets/country.json'
 
-import TextSelect from '../components/textSelect.vue'
-import TextInput from '../components/textInput.vue'
+// 组件
+import TextSelect from '~/components/textSelect.vue'
+import TextInput from '~/components/textInput.vue'
 
 export default {
   components: {
@@ -80,7 +82,7 @@ export default {
         return
       }
 
-      // 刷新 UI
+      // 数据获取中…
       this.isGettingData = true
 
       // 存储搜索对象
@@ -99,15 +101,12 @@ export default {
         .then(response => {
           const res = response.data
           if (!res.results || res.results.length <= 0) {
-            this.$emit('itunesResultCallback', [])
             this.isGettingData = false
             return
           }
           this.isGettingData = false
-          this.$emit('itunesResultCallback', res.results)
         })
         .catch(() => {
-          this.$emit('itunesResultCallback', [])
           this.isGettingData = false
         })
     },
@@ -126,14 +125,14 @@ div#home {
   align-items: center;
   text-align: center;
   height: 100vh;
+  min-height: 660px;
   width: 100%;
   min-width: 320px;
   padding: 30px;
   color: rgb(198, 208, 235);
-  background-color: rgba(4, 8, 37, 1);
+  background-color: rgb(4, 8, 37);
 }
-
-div#side {
+div#home-flex {
   display: block;
   width: 100%;
   max-width: 400px;
@@ -155,8 +154,8 @@ button.confirm {
   width: 100%;
   border: 0;
   border-radius: 6px;
-  padding: 5px 10px;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 2;
   appearance: none;
@@ -183,7 +182,7 @@ footer {
   display: block;
   width: 100%;
   margin-top: 30px;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1.6;
   color: rgb(198, 208, 235);
   text-align: left;

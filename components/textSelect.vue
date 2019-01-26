@@ -25,7 +25,7 @@ div.text-input + div {
 
 span {
   display: block;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 2;
   text-align: left;
@@ -37,8 +37,8 @@ select {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
-  padding: 5px 44px 5px 10px;
-  font-size: 16px;
+  padding: 10px 15px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 2;
   color: #fff;
@@ -46,15 +46,5 @@ select {
   appearance: none;
   outline: 0;
   overflow: hidden;
-}
-i {
-  display: block;
-  height: 44px;
-  width: 44px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  background: url('../static/caret-down.svg') center no-repeat;
-  background-size: 16px;
 }
 </style>
