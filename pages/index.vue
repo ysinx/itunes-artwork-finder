@@ -155,7 +155,7 @@ button.confirm {
   border: 0;
   border-radius: 6px;
   padding: 10px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   line-height: 2;
   appearance: none;
@@ -182,7 +182,7 @@ footer {
   display: block;
   width: 100%;
   margin-top: 30px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
   color: rgb(198, 208, 235);
   text-align: left;
