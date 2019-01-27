@@ -1,6 +1,6 @@
 # iTunes Artwork Finder
 
-![](https://img.shields.io/badge/version-1.0.0-green.svg)
+![](https://img.shields.io/badge/version-1.0.1-green.svg)
 ![](https://img.shields.io/github/license/coder-ysj/jayyan.net-itunes.svg)
 
 基于 [iTunes Search API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/)、[Egg.js](https://eggjs.org) 和 [Nuxt.js](https://zh.nuxtjs.org) 开发。  
