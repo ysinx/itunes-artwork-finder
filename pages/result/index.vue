@@ -1,7 +1,7 @@
 <template>
   <div id="result">
     <Empty v-if="!itunesResult || itunesResult.length <= 0" :itunesResult="itunesResult"/>
-    <div id="result-card">
+    <div id="result-card" v-if="itunesResult">
       <Card
         v-for="item in itunesResult"
         :key="item.id"
@@ -42,7 +42,6 @@ export default {
       }
     }
   },
-  watchQuery: ['name', 'entity', 'country'],
   asyncData({ query }) {
     return axios
       .get('https://api.jayyan.net/itunes/list', {
@@ -56,10 +55,13 @@ export default {
       .then(response => {
         const res = response.data
         if (!res.results || res.results.length <= 0) {
-          return
+          return { itunesResult: [] }
         }
+        return { itunesResult: res.results }
       })
-      .catch(() => {})
+      .catch(() => {
+        return { itunesResult: [] }
+      })
   },
   methods: {
     selectCard(data) {
@@ -81,16 +83,17 @@ export default {
 <style>
 div#result {
   display: block;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  padding: 30px;
+  padding: 45px 30px;
   background-color: rgb(4, 8, 37);
-  overflow: hidden;
 }
 
 div#result-card {
   display: block;
   width: 100%;
+  max-width: 1000px;
+  margin: auto;
   font-size: 0;
   text-align: center;
 }

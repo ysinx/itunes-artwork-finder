@@ -1,7 +1,15 @@
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
+
+  /*
+  ** Subfolder configuration
+  */
+
+  router: {
+    base: '/itunes/'
+  },
 
   /*
   ** Headers of the page
@@ -24,7 +32,7 @@ module.exports = {
           '提取高清 iTunes 音乐专辑封面、电影海报、App Store 应用图标及截图'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/icon.png' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/itunes/icon.png' }]
   },
 
   /*
