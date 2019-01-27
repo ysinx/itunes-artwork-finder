@@ -39,13 +39,14 @@ span {
   font-size: 14px;
   font-weight: 500;
   line-height: 30px;
+  padding-right: 8px;
 }
 input {
+  cursor: pointer;
   display: inline-block;
   vertical-align: middle;
   height: 18px;
   width: 18px;
-  margin-left: 8px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 3px;
   background: rgba(255, 255, 255, 0.15);
