@@ -9,19 +9,24 @@
         v-model="project.name"
         @keyup.enter.native="search()"
       />
+      <Toggle
+        title="记住搜索历史"
+        :status="isHistoryEnabled"
+        @click.stop.native="rememberSearchHistory()"
+      />
       <button class="confirm" v-if="!isGettingData" @click.self.stop="search()">搜索</button>
       <button class="confirm" v-else disabled>
         <i></i>
       </button>
       <footer>
-        Dev by coder-ysj.
-        <br>Already open source on
+        该项目已在
         <a
           href="https://github.com/coder-ysj/jayyan.net-itunes"
           target="_blank"
           rel="noopener"
-        >GitHub</a>.
-        <br>Copyright © 2019 coder-ysj.
+        >GitHub</a> 上开源.
+        <br>Copyright © 2019
+        <a href="https://jayyan.net" target="_blank" rel="noopener">coder-ysj</a>.
       </footer>
     </div>
   </main>
@@ -36,17 +41,20 @@ import countryJson from '~/assets/country.json'
 // 组件
 import TextSelect from '~/components/textSelect.vue'
 import TextInput from '~/components/textInput.vue'
+import Toggle from '~/components/toggle.vue'
 
 export default {
   components: {
     TextSelect,
-    TextInput
+    TextInput,
+    Toggle
   },
   data() {
     return {
       entity: entityJson,
       country: countryJson,
       isGettingData: false,
+      isHistoryEnabled: false,
       project: {
         name: null,
         entity: '- 请选择 -',
@@ -54,23 +62,29 @@ export default {
       }
     }
   },
-  // 检索历史搜索数据是否合法
   mounted() {
     let project
 
+    // 判断：载入搜索历史
     try {
       project = JSON.parse(localStorage['history'])
     } catch {
       return
     }
+    this.isHistoryEnabled = true
 
     if (!this.verifyKey(entityJson, project.entity)) return
     if (!this.verifyKey(countryJson, project.country)) return
     this.project = project
   },
   methods: {
+    // 功能：记住搜索历史
+    rememberSearchHistory() {
+      this.isHistoryEnabled = !this.isHistoryEnabled
+    },
+    // 功能：搜索结果
     search() {
-      // 表单检验
+      // 逻辑：表单检验
       if (!this.project.name) {
         alert('请输入关键字')
         return
@@ -82,13 +96,15 @@ export default {
         return
       }
 
-      // 数据获取中…
+      // 状态：数据获取中…
       this.isGettingData = true
 
-      // 存储搜索对象
-      localStorage.setItem('history', JSON.stringify(this.project))
+      // 逻辑：存储搜索对象
+      localStorage.removeItem('history')
+      if (this.isHistoryEnabled === true)
+        localStorage.setItem('history', JSON.stringify(this.project))
 
-      // 获取 iTunes 数据
+      // API：获取 iTunes 数据
       axios
         .get('https://api.jayyan.net/itunes/list', {
           params: {
@@ -110,6 +126,7 @@ export default {
           this.isGettingData = false
         })
     },
+    // 逻辑：json 检验
     verifyKey(arr, key) {
       const json = arr[0]
       if (json[key] !== undefined) return true
