@@ -65,9 +65,7 @@ div#download {
     rgb(176, 30, 255) 0%,
     rgb(225, 70, 124) 100%
   );
-  transform: translateX(175px);
   border-radius: 50px;
-  box-shadow: rgba(198, 208, 235, 0.5) 0px 5px 15px;
   z-index: 8;
 }
 
@@ -102,6 +100,7 @@ div#download-list {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   background-color: rgba(4, 8, 37, 1);
+  overflow: hidden;
   z-index: 7;
 }
 
@@ -118,11 +117,5 @@ div#download-list > button {
 }
 div#download-list > button + button {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-@media screen and (max-width: 768px) {
-  div#download {
-    transform: translateX(0);
-  }
 }
 </style>
