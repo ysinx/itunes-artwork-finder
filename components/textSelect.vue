@@ -1,10 +1,16 @@
 <template>
-  <div class="text-input">
-    <span>{{ title }}</span>
-    <select :value="value" v-on:input="$emit('input', $event.target.value)">
-      <option disabled selected>- 请选择 -</option>
-      <option v-for="(value, key) in data[0]" :key="key" :value="key">{{ value }}</option>
-    </select>
+  <div class="text-select">
+    <label for="text-select">
+      {{ title }}
+      <select
+        name="text-select"
+        :value="value"
+        v-on:input="$emit('input', $event.target.value)"
+      >
+        <option disabled selected>- 请选择 -</option>
+        <option v-for="(value, key) in data[0]" :key="key" :value="key">{{ value }}</option>
+      </select>
+    </label>
     <i></i>
   </div>
 </template>
@@ -14,16 +20,16 @@ export default {
 }
 </script>
 <style scoped>
-div.text-input {
+div.text-select {
   display: block;
   width: 100%;
 }
 
-div.text-input + div {
+div.text-select + div {
   margin-top: 15px;
 }
 
-span {
+label {
   display: block;
   font-size: 16px;
   font-weight: bold;

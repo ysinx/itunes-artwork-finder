@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <main id="home">
     <div id="home-flex">
       <TextSelect title="类别" :data="entity" v-model="project.entity"/>
       <TextSelect title="国家 / 地区" :data="country" v-model="project.country"/>
@@ -24,7 +24,7 @@
         <br>Copyright © 2019 coder-ysj.
       </footer>
     </div>
-  </div>
+  </main>
 </template>
 <script>
 import axios from 'axios'
@@ -119,7 +119,7 @@ export default {
 }
 </script>
 <style>
-div#home {
+main#home {
   display: flex;
   justify-content: center;
   align-items: center;

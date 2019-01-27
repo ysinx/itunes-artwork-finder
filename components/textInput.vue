@@ -1,12 +1,15 @@
 <template>
   <div class="text-input">
-    <span>{{ title }}</span>
-    <input
-      type="text"
-      :placeholder="placeholder"
-      :value="value"
-      v-on:input="$emit('input', $event.target.value)"
-    >
+    <label for="text-input">
+      {{ title }}
+      <input
+        type="text"
+        :placeholder="placeholder"
+        :value="value"
+        name="text-input"
+        v-on:input="$emit('input', $event.target.value)"
+      >
+    </label>
   </div>
 </template>
 <script>
@@ -30,14 +33,11 @@ export default {
 
 div.text-input {
   display: block;
+  margin-top: 15px;
   width: 100%;
 }
 
-div.text-input + div {
-  margin-top: 15px;
-}
-
-span {
+label {
   display: block;
   font-size: 16px;
   font-weight: bold;
