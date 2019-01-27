@@ -2,13 +2,23 @@
   <div class="toggle">
     <label for="toggle">
       <span>{{ title }}</span>
-      <input type="checkbox" v-model="status" :class="{ selected: status }">
+      <input type="checkbox" v-model="isHistoryEnabled" :class="{ selected: isHistoryEnabled }">
     </label>
   </div>
 </template>
 <script>
 export default {
-  props: ['title', 'status']
+  props: ['title', 'status'],
+  data() {
+    return {
+      isHistoryEnabled: this.$props.status
+    }
+  },
+  watch: {
+    status(val) {
+      this.isHistoryEnabled = val
+    }
+  }
 }
 </script>
 <style scoped>

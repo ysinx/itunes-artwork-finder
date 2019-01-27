@@ -71,10 +71,10 @@ export default {
     } catch {
       return
     }
-    this.isHistoryEnabled = true
 
     if (!this.verifyKey(entityJson, project.entity)) return
     if (!this.verifyKey(countryJson, project.country)) return
+    this.isHistoryEnabled = true
     this.project = project
   },
   methods: {
