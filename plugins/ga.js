@@ -11,16 +11,3 @@ if (process.client && process.env.NODE_ENV === 'production') {
   */
   ga('create', 'UA-132403546-1', 'auto')
 }
-
-export default ({ app: { router }, store }) => {
-  /*
-  ** 每次路由变更时进行pv统计
-  */
-  router.afterEach((to, from) => {
-    /*
-    ** 告诉 GA 增加一个 PV
-    */
-    ga('set', 'page', to.fullPath)
-    ga('send', 'pageview')
-  })
-}

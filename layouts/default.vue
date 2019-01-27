@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="__nuxt_page">
     <nuxt/>
   </div>
 </template>
@@ -34,11 +34,16 @@ body {
     Ubuntu, Helvetica Neue, sans-serif;
   color: rgb(32, 82, 132);
   background: #fff;
+  width: 100%;
   min-width: 320px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+}
+
+div#__nuxt_page {
+  height: 100vh;
 }
 
 .flex-center {
