@@ -4,14 +4,6 @@ module.exports = {
   mode: 'spa',
 
   /*
-  ** Subfolder configuration
-  */
-
-  router: {
-    base: '/itunes/'
-  },
-
-  /*
   ** Headers of the page
   */
   head: {
@@ -32,13 +24,16 @@ module.exports = {
           '提取高清 iTunes 音乐专辑封面、电影海报、App Store 应用图标及截图'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/itunes/icon.png' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/icon.png' }]
   },
 
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: {
+    color: 'rgb(156, 114, 248)',
+    height: '5px'
+  },
 
   /*
   ** Global CSS
