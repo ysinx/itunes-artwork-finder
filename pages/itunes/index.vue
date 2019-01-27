@@ -14,10 +14,7 @@
         :status="isHistoryEnabled"
         @click.stop.native="rememberSearchHistory()"
       />
-      <button class="confirm" v-if="!isGettingData" @click.self.stop="search()">搜索</button>
-      <button class="confirm" v-else disabled>
-        <i></i>
-      </button>
+      <button class="confirm" @click.self.stop="search()">搜索</button>
       <footer>
         该项目已在
         <a
@@ -53,7 +50,6 @@ export default {
     return {
       entity: entityJson,
       country: countryJson,
-      isGettingData: false,
       isHistoryEnabled: false,
       project: {
         name: null,
@@ -96,35 +92,19 @@ export default {
         return
       }
 
-      // 状态：数据获取中…
-      this.isGettingData = true
-
       // 逻辑：存储搜索对象
       localStorage.removeItem('history')
       if (this.isHistoryEnabled === true)
         localStorage.setItem('history', JSON.stringify(this.project))
 
-      // API：获取 iTunes 数据
-      axios
-        .get('https://api.jayyan.net/itunes/list', {
-          params: {
-            name: this.project.name,
-            country: this.project.country,
-            entity: this.project.entity,
-            limit: 50
-          }
-        })
-        .then(response => {
-          const res = response.data
-          if (!res.results || res.results.length <= 0) {
-            this.isGettingData = false
-            return
-          }
-          this.isGettingData = false
-        })
-        .catch(() => {
-          this.isGettingData = false
-        })
+      this.$router.push({
+        path: 'result',
+        query: {
+          name: this.project.name,
+          entity: this.project.entity,
+          country: this.project.country
+        }
+      })
     },
     // 逻辑：json 检验
     verifyKey(arr, key) {
@@ -190,7 +170,7 @@ button.confirm > i {
   height: 32px;
   width: 32px;
   margin: auto;
-  background: url('../static/loading.svg') center no-repeat;
+  background: url('~static/loading.svg') center no-repeat;
   background-size: 22px;
   animation: spin 1s infinite linear;
 }

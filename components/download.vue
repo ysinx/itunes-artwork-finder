@@ -89,7 +89,7 @@ i {
   top: 8px;
   right: 8px;
   border: 0;
-  background: url('../static/close-fill.svg') center no-repeat;
+  background: url('~static/close-fill.svg') center no-repeat;
   background-size: 100%;
 }
 

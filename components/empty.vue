@@ -21,11 +21,11 @@ i.empty {
   display: block;
   height: 100%;
   width: 100%;
-  background: url('../static/filesearch.svg') center no-repeat;
+  background: url('~static/filesearch.svg') center no-repeat;
   background-size: 100px;
 }
 i.empty.zero {
-  background-image: url('../static/frown.svg');
+  background-image: url('~static/frown.svg');
 }
 
 @media screen and (max-width: 768px) {
