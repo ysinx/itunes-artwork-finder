@@ -43,6 +43,20 @@ export default {
     }
   },
   asyncData({ query }) {
+    let project
+
+    // 逻辑：json 检验
+    let verifyKey = (arr, key) => {
+      const json = arr[0]
+      if (json[key] !== undefined) return true
+      return false
+    }
+
+    // 判断：载入搜索历史
+    if (!verifyKey(entityJson, query.entity)) return { itunesResult: [] }
+    if (!verifyKey(countryJson, query.country)) return { itunesResult: [] }
+
+    // API：获取数据
     return axios
       .get('https://api.jayyan.net/itunes/list', {
         params: {
@@ -92,9 +106,15 @@ div#result {
 div#result-card {
   display: block;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
   font-size: 0;
   text-align: center;
+}
+
+@media screen and (max-width: 414px) {
+  div#result {
+    padding: 30px 15px;
+  }
 }
 </style>
