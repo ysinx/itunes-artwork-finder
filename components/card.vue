@@ -6,7 +6,11 @@
   >
     <div
       class="card-img-container"
-      :class="{ movie: src.kind === 'feature-movie', loaded: loaded, failed: failed }"
+      :class="{
+        movie: src.kind === 'feature-movie',
+        macsoftware: src.kind === 'mac-software',
+        loaded: loaded, failed: failed
+      }"
     >
       <p class="card-img-failed" v-if="failed">加载失败</p>
       <img
@@ -72,14 +76,18 @@ div.card.notSelected {
 
 div.card-img-container {
   display: block;
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   background: #fff;
   transition: box-shadow 0.25s ease-in-out;
   border: 1px solid #fff;
 }
 div.card-img-container.movie {
-  height: 300px;
+  height: 375px;
+}
+div.card-img-container.macsoftware {
+  background: transparent;
+  border: 0;
 }
 div.card-img-container.failed {
   box-shadow: none;
@@ -127,14 +135,14 @@ img.card-img.failed {
 p.card-img-title {
   display: block;
   width: 200px;
-  margin-top: 15px;
+  margin: 15px auto 0 auto;
   font-size: 16px;
   font-weight: bold;
   line-height: 1.5;
   color: #fff;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 414px) {
   div.card {
     display: block;
     margin-bottom: 45px;
