@@ -4,14 +4,6 @@ module.exports = {
   mode: 'universal',
 
   /*
-  ** Subfolder configuration
-  */
-
-  router: {
-    base: '/itunes/'
-  },
-
-  /*
   ** Headers of the page
   */
   head: {
