@@ -123,13 +123,16 @@ img.card-img {
   bottom: 0;
   left: 0;
   opacity: 0;
-  transition: opacity 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 img.card-img.loaded {
   opacity: 1;
 }
 img.card-img.failed {
   display: none;
+}
+div.card.clicked img.card-img {
+  transform: scale(0.9);
 }
 
 p.card-img-title {
