@@ -43,7 +43,7 @@ body {
 }
 
 div#__nuxt_page {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .flex-center {

@@ -3,11 +3,11 @@
     <div id="download" v-if="selectedCard.length > 0">
       <p>您已选择 {{ selectedCard.length > 9 ? '9+' : selectedCard.length }} 个项目</p>
       <i @click.self.stop="$emit('clearSelectedCard')"></i>
-      <div id="download-list">
+      <!-- <div id="download-list">
         <button @click.self.stop="download(9600)">原图下载（9600 x 9600）</button>
         <button @click.self.stop="download(512)">高清下载（512 x 512）</button>
         <button @click.self.stop="download(100)">标清下载（100 x 100）</button>
-      </div>
+      </div>-->
     </div>
   </transition>
 </template>
@@ -54,38 +54,40 @@ div#download {
   display: block;
   position: fixed;
   right: 0;
-  bottom: 30px;
+  bottom: 0;
   left: 0;
-  height: 50px;
-  width: 90%;
-  max-width: 300px;
+  height: 80px;
+  min-width: 320px;
+  width: 100%;
   margin: auto;
   background: linear-gradient(
     104.74deg,
     rgb(176, 30, 255) 0%,
     rgb(225, 70, 124) 100%
   );
-  border-radius: 50px;
   z-index: 8;
 }
 
 p {
   display: block;
-  width: calc(100% - 100px);
+  width: calc(100% - 113px);
   margin-left: 30px;
   font-size: 16px;
   font-weight: bold;
-  line-height: 50px;
+  line-height: 80px;
   color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 i {
   display: block;
-  height: 34px;
-  width: 34px;
+  height: 30px;
+  width: 30px;
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: calc(50% - 15px);
+  right: 23px;
   border: 0;
   background: url('~static/close-fill.svg') center no-repeat;
   background-size: 100%;
@@ -117,5 +119,15 @@ div#download-list > button {
 }
 div#download-list > button + button {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+@media screen and (max-width: 500px) {
+  div#download {
+    height: 60px;
+  }
+
+  p {
+    line-height: 60px;
+  }
 }
 </style>
