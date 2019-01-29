@@ -52,4 +52,12 @@ div#__nuxt_page {
   align-items: center;
   text-align: center;
 }
+
+span.helper {
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+  width: 0;
+  font-size: 0;
+}
 </style>

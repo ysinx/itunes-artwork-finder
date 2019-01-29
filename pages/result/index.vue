@@ -79,6 +79,7 @@ export default {
   },
   methods: {
     selectCard(data) {
+      data.ratio = 0
       if (this.selectedCard.length <= 0) {
         this.selectedCard.push(data)
       } else {

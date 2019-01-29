@@ -2,8 +2,8 @@
   <div
     class="card"
     :class="{ clicked: clickedStatus(), notSelected: selectedCard.length > 0 && !clicked }"
-    @click.stop="select()"
   >
+    <!-- 图片容器 -->
     <div
       class="card-img-container"
       :class="{
@@ -18,9 +18,22 @@
         class="card-img"
         @load="loaded = true"
         @error="failed = true"
+        @click.stop="select()"
         :class="{ loaded: loaded, failed: failed }"
       >
+
+      <!-- 分辨率选项 -->
+      <div class="card-img-capsule" v-if="clickedStatus()">
+        <div>
+          <span class="helper"></span>
+          <p :class="{ selected: src.ratio === 0 }">低清</p>
+          <p :class="{ selected: src.ratio === 1 }">标清</p>
+          <p :class="{ selected: src.ratio === 2 }">高清</p>
+        </div>
+      </div>
     </div>
+
+    <!-- 图片描述 -->
     <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
   </div>
 </template>
@@ -74,6 +87,8 @@ div.card.notSelected {
   opacity: 0.25;
 }
 
+/* 图片容器 */
+
 div.card-img-container {
   display: block;
   height: 250px;
@@ -97,6 +112,14 @@ div.card-img-container.failed {
     rgb(126, 66, 112) 100%
   );
   border-radius: 12px;
+}
+div.card.clicked div.card-img-container {
+  border: 0;
+  background: linear-gradient(
+    104.74deg,
+    rgb(123, 66, 246) 0%,
+    rgb(176, 30, 255) 100%
+  );
 }
 
 p.card-img-failed {
@@ -132,9 +155,48 @@ img.card-img.failed {
   display: none;
 }
 div.card.clicked img.card-img {
-  transform: scale(0.9);
+  transform: scale(0.8) translateY(-10%);
 }
 
+/* 分辨率选项 */
+
+div.card-img-capsule {
+  display: block;
+  position: absolute;
+  height: 15%;
+  width: 100%;
+  padding: 0 15px;
+  font-size: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 8;
+}
+div.card-img-capsule > div {
+  height: 100%;
+  width: 100%;
+}
+
+div.card-img-capsule p {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 2;
+  margin-top: -4%;
+  width: 32%;
+  color: #fff;
+  border-radius: 30px;
+}
+div.card-img-capsule p.selected {
+  color: rgb(156, 114, 248);
+  background: #fff;
+}
+div.card-img-capsule p + p {
+  margin-left: 2%;
+}
+
+/* 图片描述 */
 p.card-img-title {
   display: block;
   width: 200px;
@@ -154,8 +216,8 @@ p.card-img-title {
   div.card-img-container {
     display: block;
     margin: auto;
-    width: 95%;
-    padding-top: 95%;
+    width: 100%;
+    padding-top: 100%;
   }
   div.card-img-container.movie {
     padding-top: 142.5%;
