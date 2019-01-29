@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div id="download" v-if="selectedCard.length > 0" @click.stop="chooseMenu()">
+    <div id="download" v-if="selectedCard.length > 0">
       <p>您已选择 {{ selectedCard.length > 9 ? '9+' : selectedCard.length }} 个项目</p>
       <i @click.self.stop="$emit('clearSelectedCard')"></i>
       <div id="download-list">
