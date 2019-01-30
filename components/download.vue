@@ -11,11 +11,24 @@ export default {
   props: ['itunesResult', 'selectedCard'],
   methods: {
     download() {
-      if (this.$props.selectedCard <= 0) return
-      if (this.$props.selectedCard.length > 1) {
+      let arr = []
+
+      this.$props.itunesResult.map(item => {
+        if (item.ratio === 0) {
+          arr.push(item.artworkUrl100)
+        } else if (item.ratio === 1) {
+          arr.push(item.artworkUrl512)
+        } else if (item.ratio === 2) {
+          arr.push(item.artworkUrl9600)
+        }
+      })
+
+      if (arr.length <= 0) return
+      if (arr.length > 1) {
         alert('暂未开放多选下载功能')
         return
       }
+      window.open(arr[0])
     }
   }
 }

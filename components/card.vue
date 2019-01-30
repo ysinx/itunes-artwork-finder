@@ -2,8 +2,8 @@
   <div
     class="card"
     :class="{
-      clicked: src.clicked,
-      notSelected: selectedCard > 0 && !src.clicked
+      clicked: src.ratio >= 0,
+      notSelected: selectedCard > 0 && src.ratio === null
     }"
   >
     <!-- 图片容器 -->

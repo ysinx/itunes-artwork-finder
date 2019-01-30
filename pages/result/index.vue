@@ -76,7 +76,6 @@ export default {
           return { itunesResult: [] }
         }
         res.results.map(item => {
-          item.clicked = false
           item.ratio = null
         })
         return { itunesResult: res.results }
@@ -89,19 +88,16 @@ export default {
     selectRatio(item, ratio) {
       if (item.ratio === ratio) {
         item.ratio = null
-        item.clicked = false
         this.selectedCard--
         return
       }
       if (!item.ratio) {
-        item.clicked = true
         this.selectedCard++
       }
       item.ratio = ratio
     },
     clearSelectedCard() {
       this.itunesResult.map(item => {
-        item.clicked = false
         item.ratio = null
       })
       this.selectedCard = 0
@@ -121,7 +117,7 @@ div#result {
 div#result-card {
   display: block;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: auto;
   font-size: 0;
   text-align: center;
