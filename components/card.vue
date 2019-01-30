@@ -1,7 +1,10 @@
 <template>
   <div
     class="card"
-    :class="{ clicked: clickedStatus(), notSelected: selectedCard.length > 0 && !clicked }"
+    :class="{
+      clicked: src.clicked,
+      notSelected: selectedCard > 0 && !src.clicked
+    }"
   >
     <!-- 图片容器 -->
     <div
@@ -9,7 +12,8 @@
       :class="{
         movie: src.kind === 'feature-movie',
         macsoftware: src.kind === 'mac-software',
-        loaded: loaded, failed: failed
+        loaded: loaded,
+        failed: failed
       }"
     >
       <p class="card-img-failed" v-if="failed">加载失败</p>
@@ -21,7 +25,6 @@
         @click.self.stop="select()"
         :class="{ loaded: loaded, failed: failed }"
       >
-
       <!-- 分辨率选项 -->
       <div class="card-img-capsule">
         <div>
@@ -32,7 +35,6 @@
         </div>
       </div>
     </div>
-
     <!-- 图片描述 -->
     <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
   </div>
@@ -45,31 +47,21 @@ export default {
       rawSrc: this.$props.src.artworkUrl512,
       reloadSrc: '',
       loaded: false,
-      failed: false,
-      clicked: false
+      failed: false
     }
   },
   created() {
     this.reloadSrc = this.rawSrc
   },
   methods: {
-    clickedStatus() {
-      if (this.$props.selectedCard.length <= 0) {
-        this.clicked = false
-        return
-      }
-      return this.clicked
-    },
     select() {
       if (this.failed === true) {
         this.failed = false
         this.reloadSrc = this.rawSrc + '?h=' + new Date().getTime()
         return
       }
-      this.clicked = !this.clicked
-      this.$emit('selectCard', this.$props.src)
-    },
-    selectRatio(ratio) {}
+      this.$emit('selectCard', !this.$props.src.clicked)
+    }
   }
 }
 </script>

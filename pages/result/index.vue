@@ -7,7 +7,7 @@
         :key="item.id"
         :src="item"
         :selectedCard="selectedCard"
-        v-on:selectCard="selectCard($event)"
+        v-on:selectCard="selectCard(item, $event)"
       />
     </div>
     <Download :selectedCard="selectedCard" v-on:clearSelectedCard="selectedCard = []"/>
@@ -71,6 +71,10 @@ export default {
         if (!res.results || res.results.length <= 0) {
           return { itunesResult: [] }
         }
+        res.results.map(item => {
+          item.clicked = false
+          item.ratio = 0
+        })
         return { itunesResult: res.results }
       })
       .catch(() => {
@@ -78,19 +82,13 @@ export default {
       })
   },
   methods: {
-    selectCard(data) {
-      data.ratio = 0
-      if (this.selectedCard.length <= 0) {
-        this.selectedCard.push(data)
-      } else {
-        for (let index = 0; index < this.selectedCard.length; index++) {
-          if (Object.is(this.selectedCard[index], data)) {
-            this.selectedCard.splice(index, 1)
-            return
-          }
-        }
-        this.selectedCard.push(data)
+    selectCard(item, clickStatus) {
+      item.clicked = clickStatus
+      if (clickStatus === true) {
+        this.selectedCard++
+        return
       }
+      this.selectedCard--
     }
   }
 }
