@@ -61,6 +61,9 @@ export default {
         return
       }
       this.$emit('selectCard', !this.$props.src.clicked)
+    },
+    selectRatio(ratio) {
+      this.$emit('selectRatio', ratio)
     }
   }
 }

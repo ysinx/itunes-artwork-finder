@@ -8,6 +8,7 @@
         :src="item"
         :selectedCard="selectedCard"
         v-on:selectCard="selectCard(item, $event)"
+        v-on:selectRatio="item.ratio = $event"
       />
     </div>
     <Download :selectedCard="selectedCard" v-on:clearSelectedCard="clearSelectedCard()"/>
