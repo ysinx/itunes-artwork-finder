@@ -1,8 +1,9 @@
 <template>
   <transition name="fade">
     <div id="download" v-if="selectedCard > 0">
-      <p>您已选择 {{ selectedCard > 9 ? '9+' : selectedCard }} 个项目</p>
-      <i @click.self.stop="$emit('clearSelectedCard')"></i>
+      <span class="helper"></span>
+      <button>下载</button>
+      <button @click.self.stop="$emit('clearSelectedCard')">清除</button>
     </div>
   </transition>
 </template>
@@ -49,52 +50,44 @@ div#download {
   display: block;
   position: fixed;
   right: 0;
-  bottom: 0;
+  bottom: 15px;
   left: 0;
   height: 80px;
   min-width: 320px;
   width: 100%;
   margin: auto;
-  background: linear-gradient(
-    104.74deg,
-    rgb(176, 30, 255) 0%,
-    rgb(225, 70, 124) 100%
-  );
+  font-size: 0;
+  text-align: center;
   z-index: 8;
 }
 
-p {
-  display: block;
-  width: calc(100% - 113px);
-  margin-left: 30px;
+button {
+  display: inline-block;
+  vertical-align: middle;
   font-size: 16px;
-  font-weight: bold;
-  line-height: 80px;
+  font-weight: 500;
+  line-height: 40px;
+  padding: 0 45px;
   color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  background: linear-gradient(
+    104.74deg,
+    rgb(137, 1, 190) 0%,
+    rgb(53, 52, 255) 100%
+  );
+  border-radius: 40px;
 }
-
-i {
-  display: block;
-  height: 30px;
-  width: 30px;
-  position: absolute;
-  top: calc(50% - 15px);
-  right: 23px;
-  border: 0;
-  background: url('~static/close-fill.svg') center no-repeat;
-  background-size: 100%;
+button + button {
+  margin-left: 15px;
+  background: linear-gradient(
+    104.74deg,
+    rgb(30, 22, 163) 0%,
+    rgb(126, 66, 112) 100%
+  );
 }
 
 @media screen and (max-width: 500px) {
   div#download {
     height: 60px;
-  }
-
-  p {
-    line-height: 60px;
   }
 }
 </style>

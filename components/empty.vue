@@ -20,7 +20,7 @@ i.empty {
   display: block;
   height: 100%;
   width: 100%;
-  background: url('~static/filesearch.svg') center no-repeat;
+  background: center no-repeat;
   background-size: 100px;
 }
 i.empty.zero {

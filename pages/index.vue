@@ -127,7 +127,7 @@ main#home {
   min-width: 320px;
   padding: 30px;
   color: rgb(198, 208, 235);
-  background-color: rgb(4, 8, 37);
+  background: rgb(33, 44, 79);
 }
 div#home-flex {
   display: block;

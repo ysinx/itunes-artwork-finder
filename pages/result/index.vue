@@ -7,8 +7,7 @@
         :key="item.id"
         :src="item"
         :selectedCard="selectedCard"
-        v-on:selectCard="selectCard(item, $event)"
-        v-on:selectRatio="item.ratio = $event"
+        v-on:selectRatio="selectRatio(item, $event)"
       />
     </div>
     <Download :selectedCard="selectedCard" v-on:clearSelectedCard="clearSelectedCard()"/>
@@ -74,7 +73,7 @@ export default {
         }
         res.results.map(item => {
           item.clicked = false
-          item.ratio = 0
+          item.ratio = null
         })
         return { itunesResult: res.results }
       })
@@ -83,17 +82,23 @@ export default {
       })
   },
   methods: {
-    selectCard(item, clickStatus) {
-      item.clicked = clickStatus
-      if (clickStatus === true) {
-        this.selectedCard++
+    selectRatio(item, ratio) {
+      if (item.ratio === ratio) {
+        item.ratio = null
+        item.clicked = false
+        this.selectedCard--
         return
       }
-      this.selectedCard--
+      if (!item.ratio) {
+        item.clicked = true
+        this.selectedCard++
+      }
+      item.ratio = ratio
     },
     clearSelectedCard() {
       this.itunesResult.map(item => {
         item.clicked = false
+        item.ratio = null
       })
       this.selectedCard = 0
     }
@@ -106,7 +111,7 @@ div#result {
   min-height: 100vh;
   width: 100%;
   padding: 45px 30px;
-  background-color: rgb(4, 8, 37);
+  background: rgb(33, 44, 79);
 }
 
 div#result-card {
@@ -118,9 +123,9 @@ div#result-card {
   text-align: center;
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 550px) {
   div#result {
-    padding: 30px 15px;
+    padding: 30px 15px 45px 15px;
   }
 }
 </style>

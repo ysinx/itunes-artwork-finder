@@ -22,21 +22,20 @@
         class="card-img"
         @load="loaded = true"
         @error="failed = true"
-        @click.self.stop="select()"
+        @click.self.stop="reload()"
         :class="{ loaded: loaded, failed: failed }"
       >
+    </div>
+    <div class="card-content-container">
+      <!-- 图片描述 -->
+      <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
       <!-- 分辨率选项 -->
-      <div class="card-img-capsule">
-        <div>
-          <span class="helper"></span>
-          <p :class="{ selected: src.ratio === 0 }" @click.self.stop="selectRatio(0)">低清</p>
-          <p :class="{ selected: src.ratio === 1 }" @click.self.stop="selectRatio(1)">标清</p>
-          <p :class="{ selected: src.ratio === 2 }" @click.self.stop="selectRatio(2)">高清</p>
-        </div>
+      <div class="card-img-ratio">
+        <p :class="{ selected: src.ratio === 0 }" @click.self.stop="selectRatio(0)">标清 (100x100)</p>
+        <p :class="{ selected: src.ratio === 1 }" @click.self.stop="selectRatio(1)">高清 (512x512)</p>
+        <p :class="{ selected: src.ratio === 2 }" @click.self.stop="selectRatio(2)">超清 (9600x9600)</p>
       </div>
     </div>
-    <!-- 图片描述 -->
-    <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
   </div>
 </template>
 <script>
@@ -54,13 +53,12 @@ export default {
     this.reloadSrc = this.rawSrc
   },
   methods: {
-    select() {
+    reload() {
       if (this.failed === true) {
         this.failed = false
         this.reloadSrc = this.rawSrc + '?h=' + new Date().getTime()
         return
       }
-      this.$emit('selectCard', !this.$props.src.clicked)
     },
     selectRatio(ratio) {
       this.$emit('selectRatio', ratio)
@@ -70,11 +68,17 @@ export default {
 </script>
 <style scoped>
 div.card {
-  cursor: pointer;
   display: inline-block;
   vertical-align: top;
   margin: 15px 15px 30px 15px;
+  padding: 30px;
+  background: rgba(4, 8, 37, 0.8);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px;
   transition: opacity 0.25s ease-in-out;
+  font-size: 0;
+  overflow: hidden;
 }
 div.card.clicked {
   z-index: 8;
@@ -84,25 +88,22 @@ div.card.notSelected {
 }
 
 /* 图片容器 */
-
 div.card-img-container {
-  display: block;
-  height: 250px;
-  width: 250px;
+  display: inline-block;
+  vertical-align: top;
+  height: 150px;
+  width: 150px;
   background: #fff;
-  transition: box-shadow 0.25s ease-in-out;
-  border: 1px solid #fff;
   overflow: hidden;
 }
 div.card-img-container.movie {
-  height: 375px;
+  height: 225px;
 }
 div.card-img-container.macsoftware {
   background: transparent;
   border: 0;
 }
 div.card-img-container.failed {
-  box-shadow: none;
   background: linear-gradient(
     104.74deg,
     rgb(30, 22, 163) 0%,
@@ -126,6 +127,7 @@ p.card-img-failed {
 }
 
 img.card-img {
+  cursor: pointer;
   display: block;
   height: 100%;
   width: 100%;
@@ -144,43 +146,41 @@ img.card-img.failed {
   display: none;
 }
 
-/* 分辨率选项 */
-
-div.card-img-capsule {
-  display: block;
-  position: absolute;
-  height: 40px;
-  width: 100%;
-  padding: 0 15px;
-  font-size: 0;
-  background: #fff;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transform: translateY(40px);
-  transition: all 0.25s ease-in-out;
-  z-index: 8;
-}
-div.card-img-capsule > div {
-  height: 100%;
-  width: 100%;
-}
-div.card.clicked div.card-img-capsule {
-  transform: translateY(0);
-}
-
-div.card-img-capsule p {
+/* 右 */
+div.card-content-container {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
+  margin-left: 25px;
+  width: 200px;
+}
+
+/* 图片描述 */
+p.card-img-title {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #fff;
+}
+
+/* 分辨率选项 */
+div.card-img-ratio {
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+}
+
+div.card-img-ratio p {
+  cursor: pointer;
+  display: block;
   font-size: 15px;
   font-weight: 500;
-  line-height: 2;
-  width: 32%;
-  color: rgb(156, 114, 248);
-  background: #fff;
-  border-radius: 30px;
+  line-height: 2.5;
+  border-radius: 8px;
+  color: rgb(198, 208, 235);
 }
-div.card-img-capsule p.selected {
+div.card-img-ratio p.selected {
   color: #fff;
   background: linear-gradient(
     104.74deg,
@@ -188,22 +188,11 @@ div.card-img-capsule p.selected {
     rgb(176, 30, 255) 100%
   );
 }
-div.card-img-capsule p + p {
-  margin-left: 2%;
+div.card-img-ratio p + p {
+  margin-top: 5px;
 }
 
-/* 图片描述 */
-p.card-img-title {
-  display: block;
-  width: 200px;
-  margin: 15px auto 0 auto;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 1.5;
-  color: #fff;
-}
-
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 550px) {
   div.card {
     display: block;
     margin-bottom: 45px;
@@ -216,12 +205,18 @@ p.card-img-title {
     padding-top: 100%;
   }
   div.card-img-container.movie {
-    padding-top: 142.5%;
+    padding-top: 150%;
   }
 
+  div.card-content-container {
+    width: 90%;
+    margin: 30px auto 0 auto;
+  }
   p.card-img-title {
-    width: 95%;
-    margin: 15px auto 0 auto;
+    width: 100%;
+  }
+  div.card-img-ratio {
+    margin-top: 20px;
   }
 }
 </style>
