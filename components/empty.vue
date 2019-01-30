@@ -1,7 +1,6 @@
 <template>
   <div class="empty">
-    <i class="empty" v-if="!itunesResult"></i>
-    <i class="empty zero" v-else-if="itunesResult && itunesResult.length <= 0"></i>
+    <i class="empty"></i>
   </div>
 </template>
 <script>
@@ -20,11 +19,8 @@ i.empty {
   display: block;
   height: 100%;
   width: 100%;
-  background: center no-repeat;
+  background: url('~static/frown.svg') center no-repeat;
   background-size: 100px;
-}
-i.empty.zero {
-  background-image: url('~static/frown.svg');
 }
 
 @media screen and (max-width: 768px) {

@@ -14,7 +14,10 @@
         :status="isHistoryEnabled"
         @click.stop.native="rememberSearchHistory()"
       />
-      <button class="confirm" @click.self.stop="search()">搜索</button>
+      <button class="confirm" v-if="!isGettingData" @click.self.stop="search()">搜索</button>
+      <button class="confirm" v-else disabled>
+        <i></i>
+      </button>
       <footer>
         该项目已在
         <a
@@ -50,6 +53,7 @@ export default {
     return {
       entity: entityJson,
       country: countryJson,
+      isGettingData: false,
       isHistoryEnabled: false,
       project: {
         name: null,
@@ -97,6 +101,9 @@ export default {
       if (this.isHistoryEnabled === true)
         localStorage.setItem('history', JSON.stringify(this.project))
 
+      // 状态：数据获取中…
+      this.isGettingData = true
+
       this.$router.push({
         path: 'result',
         query: {
@@ -133,7 +140,6 @@ div#home-flex {
   display: block;
   width: 100%;
   max-width: 400px;
-  overflow: hidden;
 }
 
 @keyframes spin {
@@ -163,6 +169,7 @@ button.confirm {
     rgb(176, 30, 255) 0%,
     rgb(225, 70, 124) 100%
   );
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px;
   overflow: hidden;
 }
 button.confirm > i {
