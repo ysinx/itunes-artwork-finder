@@ -10,6 +10,6 @@ if (process.client && process.env.NODE_ENV === 'production') {
   ** 当前页的访问统计
   */
   ga('create', 'UA-132403546-1', 'auto')
-  ga('set', 'page', to.fullPath)
+  ga('set', 'page', location.href)
   ga('send', 'pageview')
 }
