@@ -10,7 +10,11 @@
         v-on:selectRatio="selectRatio(item, $event)"
       />
     </div>
-    <Download :selectedCard="selectedCard" v-on:clearSelectedCard="clearSelectedCard()"/>
+    <Download
+      :itunesResult="itunesResult"
+      :selectedCard="selectedCard"
+      v-on:clearSelectedCard="clearSelectedCard()"
+    />
   </div>
 </template>
 <script>
