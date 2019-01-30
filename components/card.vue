@@ -18,17 +18,17 @@
         class="card-img"
         @load="loaded = true"
         @error="failed = true"
-        @click.stop="select()"
+        @click.self.stop="select()"
         :class="{ loaded: loaded, failed: failed }"
       >
 
       <!-- 分辨率选项 -->
-      <div class="card-img-capsule" v-if="clickedStatus()">
+      <div class="card-img-capsule">
         <div>
           <span class="helper"></span>
-          <p :class="{ selected: src.ratio === 0 }">低清</p>
-          <p :class="{ selected: src.ratio === 1 }">标清</p>
-          <p :class="{ selected: src.ratio === 2 }">高清</p>
+          <p :class="{ selected: src.ratio === 0 }" @click.self.stop="selectRatio(0)">低清</p>
+          <p :class="{ selected: src.ratio === 1 }" @click.self.stop="selectRatio(1)">标清</p>
+          <p :class="{ selected: src.ratio === 2 }" @click.self.stop="selectRatio(2)">高清</p>
         </div>
       </div>
     </div>
@@ -68,7 +68,8 @@ export default {
       }
       this.clicked = !this.clicked
       this.$emit('selectCard', this.$props.src)
-    }
+    },
+    selectRatio(ratio) {}
   }
 }
 </script>
@@ -96,6 +97,7 @@ div.card-img-container {
   background: #fff;
   transition: box-shadow 0.25s ease-in-out;
   border: 1px solid #fff;
+  overflow: hidden;
 }
 div.card-img-container.movie {
   height: 375px;
@@ -112,14 +114,6 @@ div.card-img-container.failed {
     rgb(126, 66, 112) 100%
   );
   border-radius: 12px;
-}
-div.card.clicked div.card-img-container {
-  border: 0;
-  background: linear-gradient(
-    104.74deg,
-    rgb(123, 66, 246) 0%,
-    rgb(176, 30, 255) 100%
-  );
 }
 
 p.card-img-failed {
@@ -154,43 +148,50 @@ img.card-img.loaded {
 img.card-img.failed {
   display: none;
 }
-div.card.clicked img.card-img {
-  transform: scale(0.8) translateY(-10%);
-}
 
 /* 分辨率选项 */
 
 div.card-img-capsule {
   display: block;
   position: absolute;
-  height: 15%;
+  height: 40px;
   width: 100%;
   padding: 0 15px;
   font-size: 0;
+  background: #fff;
   right: 0;
   bottom: 0;
   left: 0;
+  transform: translateY(40px);
+  transition: all 0.25s ease-in-out;
   z-index: 8;
 }
 div.card-img-capsule > div {
   height: 100%;
   width: 100%;
 }
+div.card.clicked div.card-img-capsule {
+  transform: translateY(0);
+}
 
 div.card-img-capsule p {
   display: inline-block;
   vertical-align: middle;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 2;
-  margin-top: -4%;
   width: 32%;
-  color: #fff;
+  color: rgb(156, 114, 248);
+  background: #fff;
   border-radius: 30px;
 }
 div.card-img-capsule p.selected {
-  color: rgb(156, 114, 248);
-  background: #fff;
+  color: #fff;
+  background: linear-gradient(
+    104.74deg,
+    rgb(123, 66, 246) 0%,
+    rgb(176, 30, 255) 100%
+  );
 }
 div.card-img-capsule p + p {
   margin-left: 2%;
