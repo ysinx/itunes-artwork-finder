@@ -1,13 +1,8 @@
 <template>
   <transition name="fade">
-    <div id="download" v-if="selectedCard.length > 0">
-      <p>您已选择 {{ selectedCard.length > 9 ? '9+' : selectedCard.length }} 个项目</p>
+    <div id="download" v-if="selectedCard > 0">
+      <p>您已选择 {{ selectedCard > 9 ? '9+' : selectedCard }} 个项目</p>
       <i @click.self.stop="$emit('clearSelectedCard')"></i>
-      <!-- <div id="download-list">
-        <button @click.self.stop="download(9600)">原图下载（9600 x 9600）</button>
-        <button @click.self.stop="download(512)">高清下载（512 x 512）</button>
-        <button @click.self.stop="download(100)">标清下载（100 x 100）</button>
-      </div>-->
     </div>
   </transition>
 </template>
@@ -91,34 +86,6 @@ i {
   border: 0;
   background: url('~static/close-fill.svg') center no-repeat;
   background-size: 100%;
-}
-
-div#download-list {
-  display: block;
-  width: calc(100% - 50px);
-  position: absolute;
-  right: 25px;
-  bottom: 50px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  background-color: rgba(4, 8, 37, 1);
-  overflow: hidden;
-  z-index: 7;
-}
-
-div#download-list > button {
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 3;
-  outline: 0;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-}
-div#download-list > button + button {
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 @media screen and (max-width: 500px) {

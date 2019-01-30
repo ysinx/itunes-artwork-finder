@@ -10,7 +10,7 @@
         v-on:selectCard="selectCard(item, $event)"
       />
     </div>
-    <Download :selectedCard="selectedCard" v-on:clearSelectedCard="selectedCard = []"/>
+    <Download :selectedCard="selectedCard" v-on:clearSelectedCard="clearSelectedCard()"/>
   </div>
 </template>
 <script>
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       itunesResult: null,
-      selectedCard: [],
+      selectedCard: 0,
       project: {
         name: null,
         entity: null,
@@ -89,6 +89,12 @@ export default {
         return
       }
       this.selectedCard--
+    },
+    clearSelectedCard() {
+      this.itunesResult.map(item => {
+        item.clicked = false
+      })
+      this.selectedCard = 0
     }
   }
 }
