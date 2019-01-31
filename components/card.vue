@@ -127,7 +127,6 @@ p.card-img-failed {
 }
 
 img.card-img {
-  cursor: pointer;
   display: block;
   height: 100%;
   width: 100%;

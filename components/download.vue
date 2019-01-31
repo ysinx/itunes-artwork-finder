@@ -7,6 +7,9 @@
   </transition>
 </template>
 <script>
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver'
+
 export default {
   props: ['itunesResult', 'selectedCard'],
   methods: {
@@ -25,7 +28,19 @@ export default {
 
       if (arr.length <= 0) return
       if (arr.length > 1) {
-        alert('暂未开放多选下载功能')
+        try {
+          const isFileSaverSupported = !!new Blob()
+          if (!isFileSaverSupported) {
+            alert('当前浏览器环境不支持文件下载')
+            return
+          }
+        } catch (e) {}
+
+        let zip = new JSZip()
+        zip.file('Hello.txt', 'Hello World\n')
+        zip.generateAsync({ type: 'blob' }).then(content => {
+          saveAs(content, 'artwork.zip')
+        })
         return
       }
       window.open(arr[0])
