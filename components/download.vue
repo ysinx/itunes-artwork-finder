@@ -1,8 +1,10 @@
 <template>
   <transition name="fade">
     <div id="download" v-if="selectedCard > 0">
-      <button @click.self.stop="download()"></button>
-      <button @click.self.stop="$emit('clearSelectedCard')"></button>
+      <button v-if="!isReady" @click.self.stop="download()"></button>
+      <button v-else disabled></button>
+      <button v-if="!isReady" @click.self.stop="$emit('clearSelectedCard')"></button>
+      <button v-else disabled></button>
     </div>
   </transition>
 </template>
@@ -13,8 +15,14 @@ import { saveAs } from 'file-saver'
 
 export default {
   props: ['itunesResult', 'selectedCard'],
+  data() {
+    return {
+      isReady: false
+    }
+  },
   methods: {
     getFile(url) {
+      this.isReady = true
       return new Promise((resolve, reject) => {
         axios({
           method: 'get',
@@ -25,6 +33,7 @@ export default {
             resolve(data.data)
           })
           .catch(error => {
+            this.isReady = false
             reject()
             alert('数据读取失败，请重试')
             return
@@ -66,6 +75,7 @@ export default {
 
         // 逻辑: 文件打包完毕并触发下载
         Promise.all(readyToZip).then(() => {
+          this.isReady = false
           zip.generateAsync({ type: 'blob' }).then(content => {
             saveAs(content, 'artwork.zip')
           })
@@ -114,5 +124,9 @@ button {
 button + button {
   margin-left: 15px;
   background-image: url('~static/clear.svg');
+}
+button:disabled {
+  cursor: not-allowed;
+  background-color: #999;
 }
 </style>
