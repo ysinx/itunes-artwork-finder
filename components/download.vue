@@ -7,14 +7,34 @@
   </transition>
 </template>
 <script>
+import axios from 'axios'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 
 export default {
   props: ['itunesResult', 'selectedCard'],
   methods: {
+    getFile(url) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'get',
+          url,
+          responseType: 'arraybuffer'
+        })
+          .then(data => {
+            resolve(data.data)
+          })
+          .catch(error => {
+            reject()
+            alert('数据读取失败，请重试')
+            return
+          })
+      })
+    },
     download() {
       let arr = []
+      let readyToZip = []
+      let zip = new JSZip()
 
       this.$props.itunesResult.map(item => {
         if (item.ratio === 0) {
@@ -36,11 +56,21 @@ export default {
           }
         } catch (e) {}
 
-        let zip = new JSZip()
-        zip.file('Hello.txt', 'Hello World\n')
-        zip.generateAsync({ type: 'blob' }).then(content => {
-          saveAs(content, 'artwork.zip')
+        // API: 读取待压缩文件并打包
+        arr.map(item => {
+          const image = this.getFile(item).then(result => {
+            zip.file(new Date().getTime() + '.png', result, { binary: true })
+          })
+          readyToZip.push(image)
         })
+
+        // 逻辑: 文件打包完毕并触发下载
+        Promise.all(readyToZip).then(() => {
+          zip.generateAsync({ type: 'blob' }).then(content => {
+            saveAs(content, 'artwork.zip')
+          })
+        })
+
         return
       }
       window.open(arr[0])
