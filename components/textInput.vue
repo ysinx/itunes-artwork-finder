@@ -44,7 +44,6 @@ label {
   line-height: 2;
   text-align: left;
 }
-
 input {
   display: block;
   margin-top: 10px;

@@ -1,6 +1,6 @@
 <template>
   <main id="home">
-    <div id="home-flex">
+    <div id="home-option">
       <TextSelect title="类别" :data="entity" v-model="project.entity"/>
       <TextSelect title="国家 / 地区" :data="country" v-model="project.country"/>
       <TextInput
@@ -14,8 +14,8 @@
         :status="isHistoryEnabled"
         @click.stop.native="rememberSearchHistory()"
       />
-      <button class="confirm" v-if="!isGettingData" @click.self.stop="search()">搜索</button>
-      <button class="confirm" v-else disabled>
+      <button v-if="!isGettingData" @click.self.stop="search()">搜索</button>
+      <button v-else disabled>
         <i></i>
       </button>
       <footer>
@@ -136,7 +136,7 @@ main#home {
   color: rgb(198, 208, 235);
   background: rgb(33, 44, 79);
 }
-div#home-flex {
+div#home-option {
   display: block;
   width: 100%;
   max-width: 400px;
@@ -150,7 +150,7 @@ div#home-flex {
     transform: rotate(360deg);
   }
 }
-button.confirm {
+button {
   cursor: pointer;
   display: block;
   margin-top: 30px;
@@ -172,7 +172,7 @@ button.confirm {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px;
   overflow: hidden;
 }
-button.confirm > i {
+button > i {
   display: block;
   height: 32px;
   width: 32px;

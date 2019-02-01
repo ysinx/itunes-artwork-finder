@@ -18,7 +18,7 @@
     >
       <p class="card-img-failed" v-if="failed">加载失败</p>
       <img
-        :src="reloadSrc"
+        :src="reloadSrc + '?t=' + new Date().getTime()"
         class="card-img"
         @load="loaded = true"
         @error="failed = true"
@@ -136,7 +136,7 @@ img.card-img {
   bottom: 0;
   left: 0;
   opacity: 0;
-  transition: all 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
 }
 img.card-img.loaded {
   opacity: 1;

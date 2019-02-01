@@ -24,7 +24,6 @@ div.text-select {
   display: block;
   width: 100%;
 }
-
 div.text-select + div {
   margin-top: 15px;
 }
