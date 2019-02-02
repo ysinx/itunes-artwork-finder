@@ -14,7 +14,9 @@
       :itunesResult="itunesResult"
       :selectedCard="selectedCard"
       v-on:clearSelectedCard="clearSelectedCard()"
+      v-on:isLoading="isLoading = $event"
     />
+    <RainbowLoading :isLoading="isLoading"/>
   </div>
 </template>
 <script>
@@ -28,17 +30,20 @@ import countryJson from '~/assets/country.json'
 import Empty from '~/components/empty.vue'
 import Card from '~/components/card.vue'
 import Download from '~/components/download.vue'
+import RainbowLoading from '~/components/rainbowLoad.vue'
 
 export default {
   components: {
     Empty,
     Card,
-    Download
+    Download,
+    RainbowLoading
   },
   data() {
     return {
       itunesResult: null,
       selectedCard: 0,
+      isLoading: false,
       project: {
         name: null,
         entity: null,
