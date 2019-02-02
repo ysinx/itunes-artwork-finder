@@ -1,5 +1,7 @@
 # iTunes Artwork Finder
 
+![截图](./static/screenshot.png)
+
 ![](https://img.shields.io/badge/version-1.1.0-green.svg)
 ![](https://img.shields.io/github/license/coder-ysj/jayyan.net-itunes.svg)
 
