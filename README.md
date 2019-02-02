@@ -1,6 +1,6 @@
 # iTunes Artwork Finder
 
-![](https://img.shields.io/badge/version-1.0.1-green.svg)
+![](https://img.shields.io/badge/version-1.1.0-green.svg)
 ![](https://img.shields.io/github/license/coder-ysj/jayyan.net-itunes.svg)
 
 基于 [iTunes Search API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/)、[Egg.js](https://eggjs.org) 和 [Nuxt.js](https://zh.nuxtjs.org) 开发。  
@@ -15,7 +15,8 @@
 ## 附加功能
 
 - 可切换不同国家及地区
-- 可选多种分辨率下载
+- 可任意选择分辨率下载
+- 批量下载
 
 ## 部署
 
@@ -37,7 +38,6 @@ $ yarn run generate
 ## 即将支持
 
 - 支持高清应用截图
-- 批量下载
 
 ## 打赏项目
 
