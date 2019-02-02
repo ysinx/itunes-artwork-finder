@@ -1,9 +1,9 @@
 <template>
   <transition name="fade">
     <div id="download" v-if="selectedCard > 0">
-      <button v-if="!isReady" @click.self.stop="download()"></button>
+      <button v-if="!isLoading" @click.self.stop="download()"></button>
       <button v-else disabled></button>
-      <button v-if="!isReady" @click.self.stop="$emit('clearSelectedCard')"></button>
+      <button v-if="!isLoading" @click.self.stop="$emit('clearSelectedCard')"></button>
       <button v-else disabled></button>
     </div>
   </transition>
@@ -14,7 +14,7 @@ import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 
 export default {
-  props: ['itunesResult', 'selectedCard'],
+  props: ['itunesResult', 'selectedCard', 'isLoading'],
   data() {
     return {
       isReady: false
@@ -102,7 +102,6 @@ export default {
 }
 
 div#download {
-  cursor: pointer;
   display: block;
   position: fixed;
   right: 30px;
@@ -130,6 +129,5 @@ button + button {
 }
 button:disabled {
   cursor: not-allowed;
-  background-color: #999;
 }
 </style>

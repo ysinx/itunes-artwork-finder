@@ -1,5 +1,5 @@
 <template>
-  <div class="rainbow-loading" v-if="isLoading">
+  <div class="rainbow-loading" :class="{ active: isLoading }">
     <div class="rainbow-loading-progress"></div>
   </div>
 </template>
@@ -23,7 +23,12 @@ div.rainbow-loading {
   top: 0;
   right: 0;
   left: 0;
+  opacity: 0;
   z-index: 9;
+  transition: opacity 0.5s ease-in-out;
+}
+div.rainbow-loading.active {
+  opacity: 1;
 }
 div.rainbow-loading-progress {
   display: block;

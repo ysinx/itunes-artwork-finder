@@ -13,6 +13,7 @@
     <Download
       :itunesResult="itunesResult"
       :selectedCard="selectedCard"
+      :isLoading="isLoading"
       v-on:clearSelectedCard="clearSelectedCard()"
       v-on:isLoading="isLoading = $event"
     />
