@@ -49,9 +49,9 @@ export default {
 
       this.$props.itunesResult.map(item => {
         if (item.ratio === 0) {
-          arr.push(item.artworkUrl100)
-        } else if (item.ratio === 1) {
           arr.push(item.artworkUrl512)
+        } else if (item.ratio === 1) {
+          arr.push(item.artworkUrl1024)
         } else if (item.ratio === 2) {
           arr.push(item.artworkUrl9600)
         }

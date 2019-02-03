@@ -31,8 +31,8 @@
       <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
       <!-- 分辨率选项 -->
       <div class="card-img-ratio">
-        <p :class="{ selected: src.ratio === 0 }" @click.self.stop="selectRatio(0)">标清 (100x100)</p>
-        <p :class="{ selected: src.ratio === 1 }" @click.self.stop="selectRatio(1)">高清 (512x512)</p>
+        <p :class="{ selected: src.ratio === 0 }" @click.self.stop="selectRatio(0)">标清 (512x512)</p>
+        <p :class="{ selected: src.ratio === 1 }" @click.self.stop="selectRatio(1)">高清 (1024x1024)</p>
         <p :class="{ selected: src.ratio === 2 }" @click.self.stop="selectRatio(2)">超清 (9600x9600)</p>
       </div>
     </div>
