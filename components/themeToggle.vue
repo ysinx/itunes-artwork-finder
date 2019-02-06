@@ -15,20 +15,24 @@ export default {
   }),
   beforeMount() {
     const themeConfig = localStorage['theme']
+
     if (themeConfig && themeConfig !== 'day') {
       localStorage.setItem('theme', 'night')
       this.$store.commit('changeTheme', 1)
       return
     }
+
     localStorage.setItem('theme', 'day')
   },
   methods: {
+    // 主题切换
     toggleTheme() {
       if (this.store_theme === 0) {
         this.$store.commit('changeTheme', 1)
         localStorage.setItem('theme', 'night')
         return
       }
+
       this.$store.commit('changeTheme', 0)
       localStorage.setItem('theme', 'day')
     }
@@ -37,6 +41,7 @@ export default {
 </script>
 <style scoped>
 div.toggle {
+  cursor: pointer;
   display: block;
   height: 50px;
   width: 50px;
@@ -87,4 +92,3 @@ div.toggle.dark div.toggle-container {
   transform: translateX(-50px);
 }
 </style>
-
