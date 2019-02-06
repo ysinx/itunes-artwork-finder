@@ -2,7 +2,7 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
-  
+
   router: {
     base: '/itunes/'
   },
@@ -32,12 +32,9 @@ module.exports = {
   },
 
   /*
-  ** Customize the progress-bar color
+  ** Customize the progress-bar
   */
-  loading: {
-    color: 'rgb(156, 114, 248)',
-    height: '5px'
-  },
+  loading: '~/components/loading.vue',
 
   /*
   ** Global CSS

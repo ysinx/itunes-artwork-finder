@@ -1,11 +1,23 @@
 <template>
-  <div class="rainbow-loading" :class="{ active: isLoading }">
+  <div class="rainbow-loading" :class="{ active: loading }">
     <div class="rainbow-loading-progress"></div>
   </div>
 </template>
 <script>
 export default {
-  props: ['isLoading']
+  data() {
+    return {
+      loading: false
+    }
+  },
+  methods: {
+    start() {
+      this.loading = true
+    },
+    finish() {
+      this.loading = false
+    }
+  }
 }
 </script>
 <style scoped>

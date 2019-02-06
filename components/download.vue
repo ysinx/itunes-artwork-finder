@@ -23,7 +23,7 @@ export default {
   methods: {
     getFile(url) {
       this.isReady = true
-      this.$emit('isLoading', true)
+      this.$nuxt.$loading.start()
       return new Promise((resolve, reject) => {
         axios({
           method: 'get',
@@ -35,7 +35,7 @@ export default {
           })
           .catch(error => {
             this.isReady = false
-            this.$emit('isLoading', false)
+            this.$nuxt.$loading.finish()
             reject()
             alert('数据读取失败，请重试')
             return
@@ -78,7 +78,7 @@ export default {
         // 逻辑: 文件打包完毕并触发下载
         Promise.all(readyToZip).then(() => {
           this.isReady = false
-          this.$emit('isLoading', false)
+          this.$nuxt.$loading.finish()
           zip.generateAsync({ type: 'blob' }).then(content => {
             saveAs(content, 'artwork.zip')
           })
