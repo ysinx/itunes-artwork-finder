@@ -3,6 +3,21 @@
     <nuxt/>
   </div>
 </template>
+<script>
+export default {
+  mounted() {
+    const themeConfig = localStorage['theme']
+
+    if (themeConfig && themeConfig !== 'day') {
+      localStorage.setItem('theme', 'night')
+      this.$store.commit('changeTheme', 1)
+      return
+    }
+
+    localStorage.setItem('theme', 'day')
+  }
+}
+</script>
 <style>
 * {
   margin: 0;
