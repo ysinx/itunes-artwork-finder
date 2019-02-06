@@ -41,7 +41,6 @@ label {
   line-height: 2;
   color: #000;
   text-align: left;
-  transition: color 0.3s ease-in-out;
 }
 
 select {
@@ -58,7 +57,6 @@ select {
   background: #fff;
   appearance: none;
   outline: 0;
-  transition: all 0.3s ease-in-out;
 }
 select.unselected {
   color: rgb(32, 82, 132);

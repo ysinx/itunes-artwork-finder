@@ -50,7 +50,6 @@ label {
   font-weight: 500;
   line-height: 2;
   text-align: left;
-  transition: all 0.3s ease-in-out;
 }
 input {
   display: block;
@@ -66,7 +65,6 @@ input {
   background: #fff;
   appearance: none;
   outline: 0;
-  transition: all 0.3s ease-in-out;
   overflow: hidden;
 }
 

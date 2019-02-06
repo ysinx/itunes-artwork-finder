@@ -48,7 +48,6 @@ span {
   line-height: 30px;
   padding-left: 5px;
   color: rgb(32, 82, 132);
-  transition: color 0.3s ease-in-out;
 }
 
 input {
@@ -62,7 +61,6 @@ input {
   background: rgba(255, 255, 255, 0.15);
   appearance: none;
   outline: 0;
-  transition: all 0.3s ease-in-out;
   overflow: hidden;
 }
 input.selected:after {

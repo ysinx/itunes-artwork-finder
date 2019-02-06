@@ -40,7 +40,6 @@ div.toggle {
   background-color: rgb(198, 208, 235);
   border: 0;
   border-radius: 50%;
-  transition: background-color 0.3s ease-in-out;
   overflow: hidden;
   z-index: 9;
 }
@@ -55,7 +54,6 @@ div.toggle-container {
   left: 0;
   font-size: 0;
   transform: translateX(0);
-  transition: all 0.3s ease-in-out;
 }
 div.toggle-container > i {
   display: inline-block;

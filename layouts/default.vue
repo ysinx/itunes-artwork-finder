@@ -1,20 +1,27 @@
 <template>
-  <div id="__nuxt_page">
+  <div id="__nuxt_page" v-if="isLoad">
     <nuxt/>
   </div>
 </template>
 <script>
 export default {
+  data() {
+    return {
+      isLoad: false
+    }
+  },
   mounted() {
     const themeConfig = localStorage['theme']
 
     if (themeConfig && themeConfig !== 'day') {
       localStorage.setItem('theme', 'night')
       this.$store.commit('changeTheme', 1)
+      this.isLoad = true
       return
     }
 
     localStorage.setItem('theme', 'day')
+    this.isLoad = true
   }
 }
 </script>

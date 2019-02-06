@@ -64,7 +64,7 @@ export default {
   computed: mapState({
     store_history: state => state.history
   }),
-  mounted() {
+  created() {
     let project
 
     // 判断：载入搜索历史
@@ -132,7 +132,6 @@ main#home {
   padding: 30px;
   color: rgb(198, 208, 235);
   background-color: #fff;
-  transition: background-color 0.3s ease-in-out;
 }
 div#home-option {
   display: block;
@@ -187,7 +186,6 @@ footer {
   line-height: 1.6;
   color: rgb(32, 82, 132);
   text-align: left;
-  transition: color 0.3s ease-in-out;
 }
 
 a {
