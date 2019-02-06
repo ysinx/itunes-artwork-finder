@@ -2,6 +2,7 @@
   <div
     class="card"
     :class="{
+      dark: store_theme === 1,
       clicked: src.ratio >= 0,
       notSelected: selectedCard > 0 && src.ratio === null
     }"
@@ -39,8 +40,13 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: ['src', 'selectedCard'],
+  computed: mapState({
+    store_theme: state => state.theme
+  }),
   data() {
     return {
       rawSrc: this.$props.src.artworkUrl512,
@@ -72,11 +78,11 @@ div.card {
   vertical-align: top;
   margin: 15px 15px 30px 15px;
   padding: 30px;
-  background: rgba(4, 8, 37, 0.8);
+  background-color: #fff;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px;
-  transition: opacity 0.25s ease-in-out;
+  border: 1px solid rgb(198, 208, 235);
+  box-shadow: rgba(198, 208, 235, 0.5) 0px 10px 20px;
+  transition: opacity 0.3s ease-in-out;
   font-size: 0;
   overflow: hidden;
 }
@@ -160,7 +166,7 @@ p.card-img-title {
   font-size: 18px;
   font-weight: bold;
   line-height: 1.5;
-  color: #fff;
+  color: #000;
 }
 
 /* 分辨率选项 */
@@ -177,7 +183,7 @@ div.card-img-ratio p {
   font-weight: 500;
   line-height: 2.5;
   border-radius: 8px;
-  color: rgb(198, 208, 235);
+  color: rgb(32, 82, 132);
 }
 div.card-img-ratio p.selected {
   color: #fff;
@@ -217,5 +223,20 @@ div.card-img-ratio p + p {
   div.card-img-ratio {
     margin-top: 20px;
   }
+}
+
+/* 黑暗模式 */
+div.card.dark {
+  background-color: rgba(4, 8, 37, 0.8);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px;
+}
+
+div.card.dark div.card-img-ratio p {
+  color: rgb(198, 208, 235);
+}
+
+div.card.dark p.card-img-title {
+  color: #fff;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <main id="home">
+  <main id="home" :class="{ dark: $store.state.theme === 1 }">
     <div id="home-option">
       <TextSelect title="类别" :data="entity" v-model="project.entity"/>
       <TextSelect title="国家 / 地区" :data="country" v-model="project.country"/>
@@ -9,11 +9,7 @@
         v-model="project.name"
         @keyup.enter.native="search()"
       />
-      <Toggle
-        title="记住搜索历史"
-        :status="isHistoryEnabled"
-        @click.stop.native="rememberSearchHistory()"
-      />
+      <HistoryToggle title="记住搜索历史"/>
       <button v-if="!isGettingData" @click.self.stop="search()">搜索</button>
       <button v-else disabled>
         <i></i>
@@ -28,11 +24,13 @@
         <br>Copyright © 2019
         <a href="https://jayyan.net" target="_blank" rel="noopener">coder-ysj</a>.
       </footer>
+      <ThemeToggle/>
     </div>
   </main>
 </template>
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 // 表单
 import entityJson from '~/assets/entity.json'
@@ -41,20 +39,21 @@ import countryJson from '~/assets/country.json'
 // 组件
 import TextSelect from '~/components/textSelect.vue'
 import TextInput from '~/components/textInput.vue'
-import Toggle from '~/components/toggle.vue'
+import HistoryToggle from '~/components/historyToggle.vue'
+import ThemeToggle from '~/components/themeToggle.vue'
 
 export default {
   components: {
     TextSelect,
     TextInput,
-    Toggle
+    HistoryToggle,
+    ThemeToggle
   },
   data() {
     return {
       entity: entityJson,
       country: countryJson,
       isGettingData: false,
-      isHistoryEnabled: false,
       project: {
         name: null,
         entity: '- 请选择 -',
@@ -62,6 +61,9 @@ export default {
       }
     }
   },
+  computed: mapState({
+    store_history: state => state.history
+  }),
   mounted() {
     let project
 
@@ -74,15 +76,10 @@ export default {
 
     if (!this.verifyKey(entityJson, project.entity)) return
     if (!this.verifyKey(countryJson, project.country)) return
-    this.isHistoryEnabled = true
+    this.$store.commit('changeHistory', true)
     this.project = project
   },
   methods: {
-    // 功能：记住搜索历史
-    rememberSearchHistory() {
-      this.isHistoryEnabled = !this.isHistoryEnabled
-    },
-    // 功能：搜索结果
     search() {
       // 逻辑：表单检验
       if (!this.project.name) {
@@ -98,7 +95,7 @@ export default {
 
       // 逻辑：存储搜索对象
       localStorage.removeItem('history')
-      if (this.isHistoryEnabled === true)
+      if (this.store_history === true)
         localStorage.setItem('history', JSON.stringify(this.project))
 
       // 状态：数据获取中…
@@ -122,7 +119,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 main#home {
   display: flex;
   justify-content: center;
@@ -134,7 +131,8 @@ main#home {
   min-width: 320px;
   padding: 30px;
   color: rgb(198, 208, 235);
-  background: rgb(33, 44, 79);
+  background-color: #fff;
+  transition: background-color 0.3s ease-in-out;
 }
 div#home-option {
   display: block;
@@ -153,7 +151,6 @@ div#home-option {
 button {
   cursor: pointer;
   display: block;
-  margin-top: 30px;
   width: 100%;
   border: 0;
   border-radius: 6px;
@@ -169,7 +166,7 @@ button {
     rgb(176, 30, 255) 0%,
     rgb(225, 70, 124) 100%
   );
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px;
+  box-shadow: rgba(101, 41, 255, 0.15) 0px 10px 20px;
   overflow: hidden;
 }
 button > i {
@@ -188,12 +185,22 @@ footer {
   margin-top: 30px;
   font-size: 14px;
   line-height: 1.6;
-  color: rgb(198, 208, 235);
+  color: rgb(32, 82, 132);
   text-align: left;
+  transition: color 0.3s ease-in-out;
 }
 
 a {
   font-weight: 500;
   color: rgb(156, 114, 248);
+}
+
+/* 夜间模式 */
+main#home.dark {
+  background-color: rgb(33, 44, 79);
+}
+
+main#home.dark footer {
+  color: rgb(198, 208, 235);
 }
 </style>

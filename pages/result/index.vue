@@ -1,5 +1,5 @@
 <template>
-  <div id="result">
+  <div id="result" :class="{ dark: store_theme === 1 }">
     <Empty v-if="!itunesResult || itunesResult.length <= 0" :itunesResult="itunesResult"/>
     <div id="result-card" v-if="itunesResult">
       <Card
@@ -13,15 +13,13 @@
     <Download
       :itunesResult="itunesResult"
       :selectedCard="selectedCard"
-      :isLoading="isLoading"
       v-on:clearSelectedCard="clearSelectedCard()"
-      v-on:isLoading="isLoading = $event"
     />
-    <RainbowLoading :isLoading="isLoading"/>
   </div>
 </template>
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 // 表单
 import entityJson from '~/assets/entity.json'
@@ -31,15 +29,16 @@ import countryJson from '~/assets/country.json'
 import Empty from '~/components/empty.vue'
 import Card from '~/components/card.vue'
 import Download from '~/components/download.vue'
-import RainbowLoading from '~/components/rainbowLoad.vue'
 
 export default {
   components: {
     Empty,
     Card,
-    Download,
-    RainbowLoading
+    Download
   },
+  computed: mapState({
+    store_theme: state => state.theme
+  }),
   data() {
     return {
       itunesResult: null,
@@ -111,13 +110,13 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 div#result {
   display: block;
   min-height: 100vh;
   width: 100%;
   padding: 45px 30px;
-  background: rgb(33, 44, 79);
+  background-color: #fff;
 }
 
 div#result-card {
@@ -133,5 +132,10 @@ div#result-card {
   div#result {
     padding: 30px 15px 45px 15px;
   }
+}
+
+/* 黑暗模式 */
+div#result.dark {
+  background-color: rgb(33, 44, 79);
 }
 </style>
