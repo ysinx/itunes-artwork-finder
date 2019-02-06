@@ -13,17 +13,6 @@ export default {
   computed: mapState({
     store_theme: state => state.theme
   }),
-  beforeMount() {
-    const themeConfig = localStorage['theme']
-
-    if (themeConfig && themeConfig !== 'day') {
-      localStorage.setItem('theme', 'night')
-      this.$store.commit('changeTheme', 1)
-      return
-    }
-
-    localStorage.setItem('theme', 'day')
-  },
   methods: {
     // 主题切换
     toggleTheme() {

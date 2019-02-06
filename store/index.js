@@ -6,13 +6,15 @@ Vue.use(Vuex)
 const store = () =>
   new Vuex.Store({
     state: {
-      /* 0 代表浅色主题
-      1 代表深色主题 */
-      theme: 0
+      theme: 0,
+      history: false
     },
     mutations: {
       changeTheme(state, status) {
         state.theme = status
+      },
+      changeHistory(state, status) {
+        state.history = status
       }
     }
   })
