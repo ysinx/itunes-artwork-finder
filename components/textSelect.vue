@@ -1,10 +1,11 @@
 <template>
-  <div class="text-select">
+  <div class="text-select" :class="{ dark: store_theme === 1 }">
     <label for="text-select">
       {{ title }}
       <select
         name="text-select"
         :value="value"
+        :class="{ unselected: value === '- 请选择 -' }"
         v-on:input="$emit('input', $event.target.value)"
       >
         <option disabled selected>- 请选择 -</option>
@@ -15,8 +16,13 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  props: ['title', 'data', 'value']
+  props: ['title', 'data', 'value'],
+  computed: mapState({
+    store_theme: state => state.theme
+  })
 }
 </script>
 <style scoped>
@@ -33,22 +39,42 @@ label {
   font-size: 16px;
   font-weight: bold;
   line-height: 2;
+  color: #000;
   text-align: left;
+  transition: color 0.3s ease-in-out;
 }
 
 select {
   display: block;
   margin-top: 10px;
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgb(198, 208, 235);
   border-radius: 6px;
   padding: 10px 15px;
   font-size: 16px;
   font-weight: 500;
   line-height: 2;
-  color: #fff;
-  background: rgba(4, 8, 37, 0.8);
+  color: #000;
+  background: #fff;
   appearance: none;
   outline: 0;
+  transition: all 0.3s ease-in-out;
+}
+select.unselected {
+  color: rgb(32, 82, 132);
+}
+
+/* 黑暗模式 */
+div.text-select.dark label {
+  color: rgb(198, 208, 235);
+}
+
+div.text-select.dark select {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  background: rgba(4, 8, 37, 0.8);
+}
+div.text-select.dark select.unselected {
+  color: rgb(198, 208, 235);
 }
 </style>
