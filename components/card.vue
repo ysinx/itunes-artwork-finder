@@ -83,6 +83,7 @@ div.card {
   border: 1px solid rgb(198, 208, 235);
   box-shadow: rgba(198, 208, 235, 0.5) 0px 10px 20px;
   font-size: 0;
+  transition: opacity 0.3s ease-in-out;
   overflow: hidden;
 }
 div.card.clicked {
