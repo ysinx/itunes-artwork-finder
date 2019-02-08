@@ -1,8 +1,8 @@
 <template>
   <div class="toggle" :class="{ dark: store_theme === 1 }">
     <label for="toggle">
-      <input type="checkbox" v-model="store_history" :class="{ selected: store_history }">
       <span>{{ title }}</span>
+      <input type="checkbox" v-model="store_history" :class="{ selected: store_history }">
     </label>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
 <style scoped>
 div.toggle {
   display: block;
-  margin: 15px 0;
+  margin: 15px 0 5px 0;
   user-select: none;
   text-align: right;
 }
@@ -46,7 +46,7 @@ span {
   font-size: 14px;
   font-weight: 500;
   line-height: 30px;
-  padding-left: 5px;
+  padding-right: 5px;
   color: rgb(32, 82, 132);
 }
 

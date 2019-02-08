@@ -10,6 +10,7 @@
         @keyup.enter.native="search()"
       />
       <HistoryToggle title="记住搜索历史"/>
+      <ThemeToggle title="黑暗模式"/>
       <button v-if="!isGettingData" @click.self.stop="search()">搜索</button>
       <button v-else disabled>
         <i></i>
@@ -24,7 +25,6 @@
         <br>Copyright © 2019
         <a href="https://jayyan.net" target="_blank" rel="noopener">coder-ysj</a>.
       </footer>
-      <ThemeToggle/>
     </div>
   </main>
 </template>

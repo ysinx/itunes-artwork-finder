@@ -1,81 +1,85 @@
 <template>
-  <div class="toggle" :class="{ dark: store_theme === 1 }" @click.stop="toggleTheme()">
-    <div class="toggle-container">
-      <i></i>
-      <i></i>
-    </div>
+  <div class="toggle" :class="{ dark: store_theme === 1 }">
+    <label for="toggle">
+      <span>{{ title }}</span>
+      <input type="checkbox" v-model="store_theme" :class="{ selected: store_theme === 1 }">
+    </label>
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 
 export default {
-  computed: mapState({
-    store_theme: state => state.theme
-  }),
-  methods: {
-    // 主题切换
-    toggleTheme() {
-      if (this.store_theme === 0) {
-        this.$store.commit('changeTheme', 1)
-        localStorage.setItem('theme', 'night')
-        return
+  props: ['title'],
+  computed: {
+    store_theme: {
+      get() {
+        return this.$store.state.theme
+      },
+      set() {
+        this.$store.commit('changeTheme', this.$store.state.theme === 1 ? 0 : 1)
       }
-
-      this.$store.commit('changeTheme', 0)
-      localStorage.setItem('theme', 'day')
     }
   }
 }
 </script>
 <style scoped>
 div.toggle {
-  cursor: pointer;
   display: block;
-  height: 50px;
-  width: 50px;
-  position: fixed;
-  right: 30px;
-  bottom: 30px;
-  background-color: rgb(198, 208, 235);
-  border: 0;
-  border-radius: 50%;
-  overflow: hidden;
-  z-index: 9;
+  margin-bottom: 15px;
+  user-select: none;
+  text-align: right;
 }
 
-div.toggle-container {
-  display: block;
-  height: 50px;
-  width: 100px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
+label {
   font-size: 0;
-  transform: translateX(0);
 }
-div.toggle-container > i {
+
+span {
   display: inline-block;
   vertical-align: middle;
-  height: 50px;
-  width: 50px;
-}
-div.toggle-container > i:first-child {
-  background: url('~static/moon.svg') center no-repeat;
-  background-size: 25px;
-}
-div.toggle-container > i:nth-child(2) {
-  background: url('~static/sun.svg') center no-repeat;
-  background-size: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 30px;
+  padding-right: 8px;
+  color: rgb(32, 82, 132);
 }
 
-/* 夜间模式 */
-div.toggle.dark {
-  background-color: rgb(32, 82, 132);
+input {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  height: 18px;
+  width: 18px;
+  border: 1px solid rgb(198, 208, 235);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  appearance: none;
+  outline: 0;
+  overflow: hidden;
+}
+input.selected:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  background: rgb(156, 114, 248);
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
 }
 
-div.toggle.dark div.toggle-container {
-  transform: translateX(-50px);
+/* 黑暗模式 */
+div.toggle.dark span {
+  color: rgb(198, 208, 235);
+}
+
+div.toggle.dark input {
+  border-color: rgba(255, 255, 255, 0.15);
 }
 </style>
