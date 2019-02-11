@@ -1,0 +1,73 @@
+{
+  "home": {
+    "search": "搜索",
+    "search_type": "类别",
+    "search_type_placeholder": "- 请选择 -",
+    "search_country": "国家 / 地区",
+    "search_country_placeholder": "- 请选择 -",
+    "keyword": "关键字",
+    "keyword_placeholder": "例如：Daft Punk",
+    "history": "记住搜索历史",
+    "dark_mode": "黑暗模式"
+  },
+  "result": {
+    "title": "Welcome",
+    "introduction": "This is an introduction in English."
+  },
+  "entity": {
+    "placeholder": "- 请选择 -",
+    "list": {
+      "software": "iPhone 应用",
+      "iPadSoftware": "iPad 应用",
+      "macSoftware": "Mac 应用",
+      "podcast": "播客",
+      "tvSeason": "电视剧",
+      "movie": "电影",
+      "album": "音乐专辑"
+    }
+  },
+  "country": {
+    "placeholder": "- 请选择 -",
+    "list": {
+      "ie": "爱尔兰",
+      "eg": "埃及",
+      "au": "澳大利亚",
+      "mo": "澳门",
+      "br": "巴西",
+      "is": "冰岛",
+      "pl": "波兰",
+      "de": "德国",
+      "ru": "俄罗斯",
+      "fr": "法国",
+      "ph": "菲律宾",
+      "fi": "芬兰",
+      "co": "哥伦比亚",
+      "kr": "韩国",
+      "nl": "荷兰",
+      "ca": "加拿大",
+      "my": "马来西亚",
+      "us": "美国",
+      "mx": "墨西哥",
+      "za": "南非",
+      "no": "挪威",
+      "se": "瑞典",
+      "jp": "日本",
+      "sa": "沙特阿拉伯",
+      "th": "泰国",
+      "tw": "台湾",
+      "tr": "土耳其",
+      "ua": "乌克兰",
+      "es": "西班牙",
+      "gr": "希腊",
+      "hk": "香港",
+      "sg": "新加坡",
+      "nz": "新西兰",
+      "it": "意大利",
+      "in": "印度",
+      "id": "印度尼西亚",
+      "gb": "英国",
+      "vn": "越南",
+      "cn": "中国"
+    }
+  }
+}

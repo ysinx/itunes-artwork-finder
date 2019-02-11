@@ -7,7 +7,8 @@ const store = () =>
   new Vuex.Store({
     state: {
       theme: 0,
-      history: false
+      history: false,
+      locale: 'cn'
     },
     mutations: {
       CHANGE_THEME(state, status) {
@@ -15,6 +16,9 @@ const store = () =>
       },
       CHANGE_HISTORY(state, status) {
         state.history = status
+      },
+      CHANGE_LOCALE(state, status) {
+        state.locale = status
       }
     }
   })

@@ -12,6 +12,13 @@ export default {
   },
   mounted() {
     const themeConfig = localStorage['theme']
+    const localeConfig = localStorage['locale']
+
+    this.$store.commit(
+      'CHANGE_LOCALE',
+      localeConfig && localeConfig === 'en' ? 'en' : 'cn'
+    )
+    this.$i18n.locale = this.$store.state.locale
 
     if (themeConfig && themeConfig !== 'day') {
       localStorage.setItem('theme', 'night')
