@@ -20,26 +20,24 @@
 - 可任意选择分辨率下载
 - 批量下载
 - 主题切换
+- 中英文语言
 
 ## 部署
 
 ```bash
 # install dependencies
-$ yarn install
+$ yarn
 
 # serve with hot reload at localhost:3000/itunes/
 $ yarn run dev
 
 # build for production and launch server
 $ yarn run build
-$ yarn start
-
-# generate static project
-$ yarn run generate
+$ pm2 start npm --name "jayyan.net-itunes" -- start
 ```
 
 ## 打赏项目
 
-考虑到线上环境需要一个稳定的硬件基础，因此为了尽可能保证服务的正常使用，暂时没有开放「批量下载」功能。如果您真的十分需要这项功能，或者只是单纯地希望赞助，欢迎您能给予一定的现金打赏，这些费用我将用于升级服务器配置，并在届时开放相关功能。
+如果您支持这个项目，或是希望提供赞助，欢迎您给予一定的现金打赏，这些费用我将用于升级服务器配置，并开发出更多更实用的功能。
 
 <img src="https://raw.githubusercontent.com/coder-ysj/jayyan.net-itunes/master/static/reward.JPG" width="200px" />
