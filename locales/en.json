@@ -1,13 +1,16 @@
 {
+  "failed": {
+    "load_failed": "Failed",
+    "read_failed": "Download failed. Please retry.",
+    "not_support_to_download": "Current browser is not support to download files.",
+    "need_keyword": "Please enter keyword.",
+    "need_type": "Please choose entity.",
+    "need_country": "Please choose country or region."
+  },
   "home": {
     "search": "Search",
     "search_type": "Entity",
     "search_country": "Country / Region",
-    "search_failed:": {
-      "keyword": "Please enter keyword.",
-      "type": "Please choose entity.",
-      "country": "Please choose country or region."
-    },
     "keyword": "Keyword",
     "keyword_placeholder": "Example: Daft Punk",
     "history": "Remember History",
@@ -16,12 +19,7 @@
   "result": {
     "sd": "SD",
     "hd": "HD",
-    "fhd": "FHD",
-    "load_failed": "Failed",
-    "download": {
-      "failed": "Download failed. Please retry.",
-      "not_support": "Current browser is not support to download files."
-    }
+    "fhd": "FHD"
   },
   "entity": {
     "placeholder": "- Please Select -",

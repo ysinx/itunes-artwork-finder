@@ -17,7 +17,7 @@
         failed: failed
       }"
     >
-      <p class="card-img-failed" v-if="failed">{{ $t('result.load_failed') }}</p>
+      <p class="card-img-failed" v-if="failed">{{ $t('failed.load_failed') }}</p>
       <img
         :src="reloadSrc + '?t=' + new Date().getTime()"
         class="card-img"

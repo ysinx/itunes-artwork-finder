@@ -1,14 +1,17 @@
 {
+  "failed": {
+    "load_failed": "加载失败",
+    "read_failed": "数据读取失败，请重试.",
+    "not_support_to_download": "当前浏览器环境不支持文件下载。",
+    "need_keyword": "请输入关键字。",
+    "need_type": "请选择类别。",
+    "need_country": "请选择国家或地区。"
+  },
   "home": {
     "search": "搜索",
     "search_type": "类别",
     "search_type_placeholder": "- 请选择 -",
     "search_country": "国家 / 地区",
-    "search_failed:": {
-      "keyword": "请输入关键字.",
-      "type": "请选择类别.",
-      "country": "请选择国家或地区."
-    },
     "search_country_placeholder": "- 请选择 -",
     "keyword": "关键字",
     "keyword_placeholder": "例如：Daft Punk",
@@ -18,12 +21,7 @@
   "result": {
     "sd": "标清",
     "hd": "高清",
-    "fhd": "超高清",
-    "load_failed": "加载失败",
-    "download": {
-      "failed": "数据读取失败，请重试.",
-      "not_support": "当前浏览器环境不支持文件下载."
-    }
+    "fhd": "超高清"
   },
   "entity": {
     "placeholder": "- 请选择 -",

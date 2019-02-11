@@ -37,7 +37,7 @@ export default {
             this.isReady = false
             this.$nuxt.$loading.finish()
             reject()
-            alert(this.$t('result.download.failed'))
+            alert(this.$t('failed.read_failed'))
             return
           })
       })
@@ -62,7 +62,7 @@ export default {
         try {
           const isFileSaverSupported = !!new Blob()
           if (!isFileSaverSupported) {
-            alert(this.$t('result.download.not_support'))
+            alert(this.$t('failed.not_support_to_download'))
             return
           }
         } catch (e) {}

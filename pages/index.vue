@@ -86,13 +86,13 @@ export default {
     search() {
       // 逻辑：表单检验
       if (!this.project.name) {
-        alert(this.$t('home.search_failed.keyword'))
+        alert(this.$t('failed.need_keyword'))
         return
       } else if (this.project.entity === this.$t('entity.placeholder')) {
-        alert(this.$t('home.search_failed.type'))
+        alert(this.$t('failed.need_type'))
         return
       } else if (this.project.country === this.$t('country.placeholder')) {
-        alert(this.$t('home.search_failed.country'))
+        alert(this.$t('failed.need_country'))
         return
       }
 
