@@ -86,13 +86,13 @@ export default {
     search() {
       // 逻辑：表单检验
       if (!this.project.name) {
-        alert('请输入关键字')
+        alert(this.$t('home.search_failed.keyword'))
         return
-      } else if (this.project.entity === '- 请选择 -') {
-        alert('请选择类别')
+      } else if (this.project.entity === this.$t('entity.placeholder')) {
+        alert(this.$t('home.search_failed.type'))
         return
-      } else if (this.project.country === '- 请选择 -') {
-        alert('请选择国家 / 地区')
+      } else if (this.project.country === this.$t('country.placeholder')) {
+        alert(this.$t('home.search_failed.country'))
         return
       }
 

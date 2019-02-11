@@ -37,7 +37,7 @@ export default {
             this.isReady = false
             this.$nuxt.$loading.finish()
             reject()
-            alert('数据读取失败，请重试')
+            alert(this.$t('result.download.failed'))
             return
           })
       })
@@ -62,7 +62,7 @@ export default {
         try {
           const isFileSaverSupported = !!new Blob()
           if (!isFileSaverSupported) {
-            alert('当前浏览器环境不支持文件下载')
+            alert(this.$t('result.download.not_support'))
             return
           }
         } catch (e) {}

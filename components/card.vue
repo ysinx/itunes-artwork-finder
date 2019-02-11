@@ -17,7 +17,7 @@
         failed: failed
       }"
     >
-      <p class="card-img-failed" v-if="failed">加载失败</p>
+      <p class="card-img-failed" v-if="failed">{{ $t('result.load_failed') }}</p>
       <img
         :src="reloadSrc + '?t=' + new Date().getTime()"
         class="card-img"
@@ -32,9 +32,18 @@
       <p class="card-img-title">{{ src.trackName ? src.trackName : src.collectionName }}</p>
       <!-- 分辨率选项 -->
       <div class="card-img-ratio">
-        <p :class="{ selected: src.ratio === 0 }" @click.self.stop="selectRatio(0)">标清 (512x512)</p>
-        <p :class="{ selected: src.ratio === 1 }" @click.self.stop="selectRatio(1)">高清 (1024x1024)</p>
-        <p :class="{ selected: src.ratio === 2 }" @click.self.stop="selectRatio(2)">超清 (9600x9600)</p>
+        <p
+          :class="{ selected: src.ratio === 0 }"
+          @click.self.stop="selectRatio(0)"
+        >{{ this.$t('result.sd') }} (512x512)</p>
+        <p
+          :class="{ selected: src.ratio === 1 }"
+          @click.self.stop="selectRatio(1)"
+        >{{ this.$t('result.hd') }} (1024x1024)</p>
+        <p
+          :class="{ selected: src.ratio === 2 }"
+          @click.self.stop="selectRatio(2)"
+        >{{ this.$t('result.fhd') }} (9600x9600)</p>
       </div>
     </div>
   </div>

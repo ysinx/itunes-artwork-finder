@@ -3,14 +3,25 @@
     "search": "Search",
     "search_type": "Entity",
     "search_country": "Country / Region",
+    "search_failed:": {
+      "keyword": "Please enter keyword.",
+      "type": "Please choose entity.",
+      "country": "Please choose country or region."
+    },
     "keyword": "Keyword",
     "keyword_placeholder": "Example: Daft Punk",
     "history": "Remember History",
     "dark_mode": "Dark Mode"
   },
   "result": {
-    "title": "Welcome",
-    "introduction": "This is an introduction in English."
+    "sd": "SD",
+    "hd": "HD",
+    "fhd": "FHD",
+    "load_failed": "Failed",
+    "download": {
+      "failed": "Download failed. Please retry.",
+      "not_support": "Current browser is not support to download files."
+    }
   },
   "entity": {
     "placeholder": "- Please Select -",
