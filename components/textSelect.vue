@@ -5,11 +5,11 @@
       <select
         name="text-select"
         :value="value"
-        :class="{ unselected: value === '- 请选择 -' }"
+        :class="{ unselected: value === data.placeholder }"
         v-on:input="$emit('input', $event.target.value)"
       >
-        <option disabled selected>- 请选择 -</option>
-        <option v-for="(value, key) in data[0]" :key="key" :value="key">{{ value }}</option>
+        <option disabled selected>{{ data.placeholder }}</option>
+        <option v-for="(value, key) in data.list" :key="key" :value="key">{{ value }}</option>
       </select>
     </label>
     <i></i>

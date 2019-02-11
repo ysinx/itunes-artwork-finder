@@ -1,27 +1,32 @@
 <template>
   <main id="home" :class="{ dark: $store.state.theme === 1 }">
     <div id="home-option">
-      <TextSelect title="类别" :data="entity" v-model="project.entity"/>
-      <TextSelect title="国家 / 地区" :data="country" v-model="project.country"/>
+      <TextSelect :title="$t('home.search_type')" :data="$t('entity')" v-model="project.entity"/>
+      <TextSelect
+        :title="$t('home.search_country')"
+        :data="$t('country')"
+        v-model="project.country"
+      />
       <TextInput
-        title="关键字"
-        placeholder="例如：Daft Punk"
+        :title="$t('home.keyword')"
+        :placeholder="$t('home.keyword_placeholder')"
         v-model="project.name"
         @keyup.enter.native="search()"
       />
-      <HistoryToggle title="记住搜索历史"/>
-      <ThemeToggle title="黑暗模式"/>
-      <button v-if="!isGettingData" @click.self.stop="search()">搜索</button>
+      <HistoryToggle :title="$t('home.history')"/>
+      <ThemeToggle :title="$t('home.dark_mode')"/>
+      <LocaleToggle title="English version"/>
+      <button v-if="!isGettingData" @click.self.stop="search()">{{ $t('home.search') }}</button>
       <button v-else disabled>
         <i></i>
       </button>
       <footer>
-        该项目已在
+        Already open sourced on
         <a
           href="https://github.com/coder-ysj/jayyan.net-itunes"
           target="_blank"
           rel="noopener"
-        >GitHub</a> 上开源.
+        >GitHub</a>.
         <br>Copyright © 2019
         <a href="https://jayyan.net" target="_blank" rel="noopener">coder-ysj</a>.
       </footer>
@@ -32,32 +37,30 @@
 import axios from 'axios'
 import { mapState } from 'vuex'
 
-// 表单
-import entityJson from '~/assets/entity.json'
-import countryJson from '~/assets/country.json'
-
 // 组件
 import TextSelect from '~/components/textSelect.vue'
 import TextInput from '~/components/textInput.vue'
 import HistoryToggle from '~/components/historyToggle.vue'
 import ThemeToggle from '~/components/themeToggle.vue'
+import LocaleToggle from '~/components/localeToggle.vue'
 
 export default {
   components: {
     TextSelect,
     TextInput,
     HistoryToggle,
-    ThemeToggle
+    ThemeToggle,
+    LocaleToggle
   },
   data() {
     return {
-      entity: entityJson,
-      country: countryJson,
+      entity: this.$t('entity.list'),
+      country: this.$t('country.list'),
       isGettingData: false,
       project: {
         name: null,
-        entity: '- 请选择 -',
-        country: '- 请选择 -'
+        entity: this.$t('entity.placeholder'),
+        country: this.$t('country.placeholder')
       }
     }
   },
@@ -74,8 +77,8 @@ export default {
       return
     }
 
-    if (!this.verifyKey(entityJson, project.entity)) return
-    if (!this.verifyKey(countryJson, project.country)) return
+    if (!this.verifyKey(this.entity, project.entity)) return
+    if (!this.verifyKey(this.country, project.country)) return
     this.$store.commit('CHANGE_HISTORY', true)
     this.project = project
   },
@@ -112,7 +115,7 @@ export default {
     },
     // 逻辑：json 检验
     verifyKey(arr, key) {
-      const json = arr[0]
+      const json = arr
       if (json[key] !== undefined) return true
       return false
     }

@@ -28,6 +28,7 @@ export default {
         )
         this.$i18n.locale = this.$store.state.locale
         localStorage.setItem('locale', this.$store.state.locale)
+        location.reload()
       }
     }
   }
