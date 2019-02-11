@@ -47,7 +47,7 @@ label {
   display: block;
   color: #000;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 2;
   text-align: left;
 }

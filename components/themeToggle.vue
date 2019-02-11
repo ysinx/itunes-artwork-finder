@@ -33,7 +33,7 @@ export default {
 <style scoped>
 div.toggle {
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   user-select: none;
   text-align: right;
 }
