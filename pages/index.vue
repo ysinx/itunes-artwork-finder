@@ -76,7 +76,7 @@ export default {
 
     if (!this.verifyKey(entityJson, project.entity)) return
     if (!this.verifyKey(countryJson, project.country)) return
-    this.$store.commit('changeHistory', true)
+    this.$store.commit('CHANGE_HISTORY', true)
     this.project = project
   },
   methods: {

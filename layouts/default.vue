@@ -15,7 +15,7 @@ export default {
 
     if (themeConfig && themeConfig !== 'day') {
       localStorage.setItem('theme', 'night')
-      this.$store.commit('changeTheme', 1)
+      this.$store.commit('CHANGE_THEME', 1)
       this.isLoad = true
       return
     }

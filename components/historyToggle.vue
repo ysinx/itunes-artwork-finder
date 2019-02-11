@@ -22,7 +22,7 @@ export default {
         return this.$store.state.history
       },
       set() {
-        this.$store.commit('changeHistory', !this.$store.state.history)
+        this.$store.commit('CHANGE_HISTORY', !this.$store.state.history)
       }
     }
   }

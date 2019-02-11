@@ -10,10 +10,10 @@ const store = () =>
       history: false
     },
     mutations: {
-      changeTheme(state, status) {
+      CHANGE_THEME(state, status) {
         state.theme = status
       },
-      changeHistory(state, status) {
+      CHANGE_HISTORY(state, status) {
         state.history = status
       }
     }

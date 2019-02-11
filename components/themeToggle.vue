@@ -17,7 +17,14 @@ export default {
         return this.$store.state.theme
       },
       set() {
-        this.$store.commit('changeTheme', this.$store.state.theme === 1 ? 0 : 1)
+        this.$store.commit(
+          'CHANGE_THEME',
+          this.$store.state.theme === 1 ? 0 : 1
+        )
+        localStorage.setItem(
+          'theme',
+          this.$store.state.theme === 1 ? 'night' : 'day'
+        )
       }
     }
   }
