@@ -134,7 +134,6 @@ main#home {
   min-width: 320px;
   padding: 30px;
   color: rgb(198, 208, 235);
-  background-color: #fff;
 }
 div#home-option {
   display: block;
@@ -197,10 +196,6 @@ a {
 }
 
 /* 夜间模式 */
-main#home.dark {
-  background-color: rgb(33, 44, 79);
-}
-
 main#home.dark footer {
   color: rgb(198, 208, 235);
 }

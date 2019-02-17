@@ -4,7 +4,19 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
+  computed: mapState({
+    store_theme: 'theme'
+  }),
+  head() {
+    return {
+      bodyAttrs: {
+        class: this.store_theme === 1 ? 'dark' : ''
+      }
+    }
+  },
   data() {
     return {
       isLoad: false
@@ -21,12 +33,14 @@ export default {
     this.$i18n.locale = this.$store.state.locale
 
     if (themeConfig && themeConfig !== 'day') {
-      localStorage.setItem('theme', 'night')
+      document.body.className += 'dark'
       this.$store.commit('CHANGE_THEME', 1)
+      localStorage.setItem('theme', 'night')
       this.isLoad = true
       return
     }
 
+    this.$store.commit('CHANGE_THEME', 0)
     localStorage.setItem('theme', 'day')
     this.isLoad = true
   }
@@ -69,6 +83,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+}
+body.dark {
+  background-color: rgb(33, 44, 79);
 }
 
 div#__nuxt_page {

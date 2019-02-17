@@ -1,5 +1,5 @@
 <template>
-  <div id="result" :class="{ dark: store_theme === 1 }">
+  <div id="result">
     <Empty v-if="!itunesResult || itunesResult.length <= 0" :itunesResult="itunesResult"/>
     <div id="result-card" v-if="itunesResult">
       <Card
@@ -101,7 +101,6 @@ div#result {
   min-height: 100vh;
   width: 100%;
   padding: 45px 30px;
-  background-color: #fff;
 }
 
 div#result-card {
@@ -117,10 +116,5 @@ div#result-card {
   div#result {
     padding: 30px 15px 45px 15px;
   }
-}
-
-/* 黑暗模式 */
-div#result.dark {
-  background-color: rgb(33, 44, 79);
 }
 </style>
